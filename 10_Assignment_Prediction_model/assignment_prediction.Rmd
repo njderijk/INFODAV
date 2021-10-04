@@ -1,0 +1,18 @@
+---
+title: "Assignment Prediction Model"
+mainfont: Arial
+fontsize: 12pt
+urlcolor: blue
+output:
+  html_document:
+    theme: paper
+  pdf_document:
+    latex_engine: xelatex
+---
+
+### Title
+Text
+
+```{r, fh, eval=FALSE}
+fh = read_csv("data/framingham.csv")
+```

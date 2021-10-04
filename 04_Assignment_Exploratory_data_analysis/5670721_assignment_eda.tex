@@ -1,0 +1,2337 @@
+\documentclass{article}\usepackage[]{graphicx}\usepackage[]{color}
+% maxwidth is the original width if it is less than linewidth
+% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+\let\hlipl\hlkwb
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+\usepackage[sc]{mathpazo}
+\renewcommand{\sfdefault}{lmss}
+\renewcommand{\ttdefault}{lmtt}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\geometry{verbose,tmargin=2.5cm,bmargin=2.5cm,lmargin=2.5cm,rmargin=2.5cm}
+\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{2}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=true,bookmarksopen=true,bookmarksopenlevel=2,
+ breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=false]
+ {hyperref}
+\hypersetup{
+ pdfstartview={XYZ null null 1}}
+
+\makeatletter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\renewcommand{\textfraction}{0.05}
+\renewcommand{\topfraction}{0.8}
+\renewcommand{\bottomfraction}{0.8}
+\renewcommand{\floatpagefraction}{0.75}
+
+\makeatother
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+
+
+
+
+
+
+
+
+The results below are generated from an R script.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# Load useful libraries}
+\hlkwd{library}\hlstd{(ISLR)}
+\end{alltt}
+
+
+{\ttfamily\noindent\color{warningcolor}{\#\# Warning: package 'ISLR' was built under R version 4.0.3}}\begin{alltt}
+\hlkwd{library}\hlstd{(tidyverse)}
+\end{alltt}
+
+
+{\ttfamily\noindent\color{warningcolor}{\#\# Warning: package 'tidyverse' was built under R version 4.0.3}}
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# -- Attaching packages --------------------------------------- tidyverse 1.3.0 --}}
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# v ggplot2 3.3.2\ \ \ \  v purrr\ \  0.3.4\\\#\# v tibble\ \ 3.0.3\ \ \ \  v dplyr\ \  1.0.2\\\#\# v tidyr\ \  1.1.2\ \ \ \  v stringr 1.4.0\\\#\# v readr\ \  1.4.0\ \ \ \  v forcats 0.5.0}}
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# -- Conflicts ------------------------------------------ tidyverse\_conflicts() --\\\#\# x dplyr::filter() masks stats::filter()\\\#\# x dplyr::lag()\ \ \ \ masks stats::lag()}}\begin{alltt}
+\hlkwd{library}\hlstd{(haven)}
+\end{alltt}
+
+
+{\ttfamily\noindent\color{warningcolor}{\#\# Warning: package 'haven' was built under R version 4.0.3}}\begin{alltt}
+\hlkwd{library}\hlstd{(readxl)}
+\end{alltt}
+
+
+{\ttfamily\noindent\color{warningcolor}{\#\# Warning: package 'readxl' was built under R version 4.0.3}}\begin{alltt}
+\hlkwd{library}\hlstd{(SmartEDA)}
+\end{alltt}
+
+
+{\ttfamily\noindent\color{warningcolor}{\#\# Warning: package 'SmartEDA' was built under R version 4.0.3}}
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Registered S3 method overwritten by 'GGally':\\\#\#\ \  method from\ \  \\\#\#\ \  +.gg\ \  ggplot2}}\begin{alltt}
+\hlkwd{library}\hlstd{(network)}
+\end{alltt}
+
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# network: Classes for Relational Data\\\#\# Version 1.16.1 created on 2020-10-06.\\\#\# copyright (c) 2005, Carter T. Butts, University of California-Irvine\\\#\#\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  Mark S. Handcock, University of California -- Los Angeles\\\#\#\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  David R. Hunter, Penn State University\\\#\#\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  Martina Morris, University of Washington\\\#\#\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  Skye Bender-deMoll, University of Washington\\\#\#\ \ For citation information, type citation("{}network"{}).\\\#\#\ \ Type help("{}network-package"{}) to get started.}}\begin{alltt}
+\hlcom{# Load data}
+\hlstd{transfers} \hlkwb{<-} \hlkwd{read.csv}\hlstd{(}\hlstr{'data/transfers.csv'}\hlstd{,} \hlkwc{sep}\hlstd{=}\hlstr{';'}\hlstd{)}
+\hlstd{dict_leagues} \hlkwb{<-} \hlkwd{read.csv}\hlstd{(}\hlstr{'data/dict_leagues.csv'}\hlstd{,} \hlkwc{sep}\hlstd{=}\hlstr{';'}\hlstd{)}
+\hlstd{dict_clubs} \hlkwb{<-} \hlkwd{read.csv}\hlstd{(}\hlstr{'data/dict_clubs.csv'}\hlstd{,} \hlkwc{sep}\hlstd{=}\hlstr{';'}\hlstd{)}
+\hlstd{clubs_in_leagues} \hlkwb{<-} \hlkwd{read.csv}\hlstd{(}\hlstr{'data/clubs_in_leagues.csv'}\hlstd{,} \hlkwc{sep}\hlstd{=}\hlstr{';'}\hlstd{)}
+
+
+\hlcom{# What is this data set?}
+
+\hlcom{# These data sets pertain to all recorded instances of football/soccer related data on players. Therefore, this data is comprised}
+\hlcom{# of, but not limited to, clubs in leagues, players in league, player transfers, player stats, positional stats of players, stats}
+\hlcom{# for players in national teams, and dictionaries of clubs, players, leagues, teams, and stadiums.}
+\hlcom{# }
+\hlcom{# Since the total data set is very large, I had to pick a topic of what story I wanted my data to tell.}
+\hlcom{# Therefore, I decided to explore the data set with the topic of transfers between clubs in mind. }
+\hlcom{# }
+\hlcom{# So, the data that I used from the whole data set are:}
+\hlcom{#   * transfers.csv}
+\hlcom{#   * dict_leagues.csv}
+\hlcom{#   * dict_clubs.csv}
+\hlcom{#   * clubs_in_leagues.csv}
+
+\hlcom{# What did I do with the data?}
+
+\hlcom{# Since I did not collect this data myself, I needed to get a feel for the data and see how the data was structured. First, I }
+\hlcom{# selected the appropriate data (see above) and then I went on to perform global EDA for each data set by viewing, summarizing, }
+\hlcom{# and applying functions from the SmartEDA library. When I got a feel for the data, I needed to transform it into a shape I could}
+\hlcom{# get valuable insights from it. This was the case because there was not data set with just the transfers between clubs.}
+\hlcom{# }
+\hlcom{# From what I gathered of the EDA, there were not many transfers that could be analyzed outside of the English competition. }
+\hlcom{# Initially, I wanted to analyze the Dutch competition out of sentiment, but there was not enough data on this. So, I constructed}
+\hlcom{# the English transfer data set by transforming and aggregating data sets. When this was done, once again I performed EDA on this}
+\hlcom{# new data set to explore it well before making any changes or getting down to the analysis part of this assignment. As an avid}
+\hlcom{# football/soccer fan, I formulated questions that I wanted to ask the data set I created. "What are the most expensive footballers?",}
+\hlcom{# "Which clubs sell or buy the most?", "How many transfers are there each year?", "Can you see the difference between clubs that sell and buy?",}
+\hlcom{# et cetera. With these questions in mind, I approached the data.}
+\hlcom{# }
+\hlcom{# However, to make this data relevant for the reader, I decided to only focus on Premier League clubs that are currently playing.}
+\hlcom{# Furthermore, data was clogged up by teams that have since been performing badly, so I did not want annoying data or noise.}
+
+\hlcom{# Perform global checks on the data sets}
+\hlkwd{View}\hlstd{(transfers)}
+\hlkwd{summary}\hlstd{(transfers)}
+\end{alltt}
+\begin{verbatim}
+##        id           player_id     player_name                                season    
+##  Min.   :     1   Min.   :    1   NULL:Jermaine Beckford                 Min.   :1984  
+##  1st Qu.: 27901   1st Qu.: 3079   NULL:Jermaine Beckford                 1st Qu.:2006  
+##  Median : 55802   Median : 5935   NULL:Jermaine Beckford                 Median :2011  
+##  Mean   : 55802   Mean   : 5849   NULL:Jermaine Beckford                 Mean   :2010  
+##  3rd Qu.: 83702   3rd Qu.: 8623   NULL:Jermaine Beckford                 3rd Qu.:2014  
+##  Max.   :111602   Max.   :11382   NULL:Jermaine Beckford                 Max.   :2020  
+##                                   NULL:Jermaine Beckford                               
+##                                   NULL:Jermaine Beckford                               
+##                                   NULL:Jermaine Beckford                               
+##                                   NULL:Jermaine Beckford                               
+##                                   NULL:Jermaine Beckford                               
+##                                   NULL:Jermaine Beckford                               
+##                                   NULL:Jermaine Beckford                               
+##                                   NULL:Jermaine Beckford                               
+##                                   NULL:Jermaine Beckford                               
+##                                   NULL:Harry Charsley                                  
+##                                   NULL:Harry Charsley                                  
+##                                   NULL:Harry Charsley                                  
+##                                   NULL:Mark Davies                                     
+##                                   NULL:Mark Davies                                     
+##                                   NULL:Mark Davies                                     
+##                                   NULL:Mark Davies                                     
+##                                   NULL:Mark Davies                                     
+##                                   NULL:Alex McQuade                                    
+##                                   NULL:Alex McQuade                                    
+##                                   NULL:Alex McQuade                                    
+##                                   NULL:Alex McQuade                                    
+##                                   NULL:Alex McQuade                                    
+##                                   NULL:Alex McQuade                                    
+##                                   NULL:Alex McQuade                                    
+##                                   NULL:Alex McQuade                                    
+##                                   NULL:Alex McQuade                                    
+##                                   NULL:Alex McQuade                                    
+##                                   NULL:Alex McQuade                                    
+##                                   NULL:Przemyslaw Kazimierczak                         
+##                                   NULL:Przemyslaw Kazimierczak                         
+##                                   NULL:Przemyslaw Kazimierczak                         
+##                                   NULL:Przemyslaw Kazimierczak                         
+##                                   NULL:Przemyslaw Kazimierczak                         
+##                                   NULL:Przemyslaw Kazimierczak                         
+##                                   NULL:Przemyslaw Kazimierczak                         
+##                                   NULL:Przemyslaw Kazimierczak                         
+##                                   NULL:Przemyslaw Kazimierczak                         
+##                                   NULL:Przemyslaw Kazimierczak                         
+##                                   NULL:Przemyslaw Kazimierczak                         
+##                                   NULL:Przemyslaw Kazimierczak                         
+##                                   NULL:Przemyslaw Kazimierczak                         
+##                                   NULL:Przemyslaw Kazimierczak                         
+##                                   NULL:Jaroslaw Fojut                                  
+##                                   NULL:Jaroslaw Fojut                                  
+##                                   NULL:Jaroslaw Fojut                                  
+##                                   NULL:Jaroslaw Fojut                                  
+##    date             from_club_id  from_club_name                                 
+##  NULL:2017-07-01   Min.   :   1   NULL:Preston NE                                
+##  NULL:2015-07-01   1st Qu.: 204   NULL:Bolton                                    
+##  NULL:2015-06-30   Median : 425   NULL:Preston NE                                
+##  NULL:2014-11-20   Mean   :1320   NULL:Bolton                                    
+##  NULL:2013-07-17   3rd Qu.:1654   NULL:Leicester                                 
+##  NULL:2013-06-30   Max.   :9381   NULL:Huddersfield                              
+##  NULL:2012-09-29                  NULL:Leicester                                 
+##  NULL:2011-08-31                  NULL:Everton                                   
+##  NULL:2010-07-01                  NULL:Leeds                                     
+##  NULL:2007-06-30                  NULL:Scunthorpe Utd.                           
+##  NULL:2007-01-01                  NULL:Leeds                                     
+##  NULL:2006-11-01                  NULL:Carlisle United                           
+##  NULL:2006-10-01                  NULL:Leeds                                     
+##  NULL:2006-03-01                  NULL:Wealdstone FC                             
+##  NULL:2003-07-01                  NULL:Own U19                                   
+##  NULL:2018-05-31                  NULL:Bolton                                    
+##  NULL:2018-01-12                  NULL:Everton U23                               
+##  NULL:2014-07-01                  NULL:Everton U18                               
+##  NULL:2017-07-01                  NULL:Bolton                                    
+##  NULL:2009-01-26                  NULL:Wolves                                    
+##  NULL:2009-01-25                  NULL:Leicester                                 
+##  NULL:2008-11-27                  NULL:Wolves                                    
+##  NULL:2005-07-01                  NULL:Wolves U18                                
+##  NULL:2018-07-01                  NULL:Ossett Albion                             
+##  NULL:2017-12-29                  NULL:Banyule City                              
+##  NULL:2016-02-19                  NULL:Warrington Town FC                        
+##  NULL:2015-07-01                  NULL:Farsley Celtic                            
+##  NULL:2015-02-20                  NULL:Hyde FC                                   
+##  NULL:2014-09-11                  NULL:Guiseley                                  
+##  NULL:2014-08-07                  NULL:Shrewsbury                                
+##  NULL:2014-03-28                  NULL:Hyde FC                                   
+##  NULL:2014-02-28                  NULL:Shrewsbury                                
+##  NULL:2013-07-01                  NULL:Bolton U23                                
+##  NULL:2011-07-01                  NULL:Bolton W. U18                             
+##  NULL:2018-08-08                  NULL:LKS Lodz                                  
+##  NULL:2016-07-20                  NULL:Pol. Warsaw                               
+##  NULL:2015-01-01                  NULL:Jarota Jarocin                            
+##  NULL:2014-03-06                  NULL:Gornik Polk.                              
+##  NULL:2012-01-30                  NULL:Orzel Zabkowice                           
+##  NULL:2011-09-01                  NULL:F. Swinoujscie                            
+##  NULL:2010-02-20                  NULL:Oldham Athletic                           
+##  NULL:2009-08-06                  NULL:Darlington                                
+##  NULL:2008-01-31                  NULL:Bolton                                    
+##  NULL:2007-10-28                  NULL:Wycombe                                   
+##  NULL:2007-09-28                  NULL:Bolton                                    
+##  NULL:2007-03-31                  NULL:Accrington St.                            
+##  NULL:2007-01-31                  NULL:Bolton                                    
+##  NULL:2006-07-01                  NULL:Bolton W. U18                             
+##  NULL:2015-07-01                  NULL:Dundee United                             
+##  NULL:2014-07-14                  NULL:TromsÃ¸                                   
+##  NULL:2013-01-01                  NULL:Without Club                              
+##  NULL:2012-07-01                  NULL:Slask Wroclaw                             
+##    to_club_id   to_club_name                                     market_value      
+##  Min.   :   1   NULL:Bury                                       Min.   :    10000  
+##  1st Qu.: 198   NULL:Preston NE                                 1st Qu.:   400000  
+##  Median : 360   NULL:Bolton                                     Median :   950000  
+##  Mean   :1138   NULL:Preston NE                                 Mean   :  1814789  
+##  3rd Qu.:1267   NULL:Bolton                                     3rd Qu.:  2000000  
+##  Max.   :9379   NULL:Leicester                                  Max.   :120000000  
+##                 NULL:Huddersfield                               NA's   :39013      
+##                 NULL:Leicester                                                     
+##                 NULL:Everton                                                       
+##                 NULL:Leeds                                                         
+##                 NULL:Scunthorpe Utd.                                               
+##                 NULL:Leeds                                                         
+##                 NULL:Carlisle United                                               
+##                 NULL:Leeds                                                         
+##                 NULL:Wealdstone FC                                                 
+##                 NULL:Everton U23                                                   
+##                 NULL:Bolton                                                        
+##                 NULL:Everton U21                                                   
+##                 NULL:Unknown                                                       
+##                 NULL:Bolton                                                        
+##                 NULL:Wolves                                                        
+##                 NULL:Leicester                                                     
+##                 NULL:Wolves                                                        
+##                 NULL:Ossett United                                                 
+##                 NULL:Ossett Albion                                                 
+##                 NULL:Banyule City                                                  
+##                 NULL:Warrington Town FC                                            
+##                 NULL:Farsley Celtic                                                
+##                 NULL:Hyde FC                                                       
+##                 NULL:Guiseley                                                      
+##                 NULL:Shrewsbury                                                    
+##                 NULL:Hyde FC                                                       
+##                 NULL:Shrewsbury                                                    
+##                 NULL:Bolton U23                                                    
+##                 NULL:Warta Sieradz                                                 
+##                 NULL:LKS Lodz                                                      
+##                 NULL:Pol. Warsaw                                                   
+##                 NULL:Jarota Jarocin                                                
+##                 NULL:Gornik Polk.                                                  
+##                 NULL:Orzel Zabkowice                                               
+##                 NULL:F. Swinoujscie                                                
+##                 NULL:Oldham Athletic                                               
+##                 NULL:Darlington                                                    
+##                 NULL:Bolton                                                        
+##                 NULL:Wycombe                                                       
+##                 NULL:Bolton                                                        
+##                 NULL:Accrington St.                                                
+##                 NULL:Bolton                                                        
+##                 NULL:Pogon Szczecin                                                
+##                 NULL:Dundee United                                                 
+##                 NULL:TromsÃ¸                                                       
+##                 NULL:Without Club                                                  
+##       fee            from_coach_name                         
+##  Min.   :        0   NULL:                                   
+##  1st Qu.:        0   NULL:                                   
+##  Median :        0   NULL:                                   
+##  Mean   :  1454327   NULL:Neil Lennon                        
+##  3rd Qu.:   900000   NULL:Nigel Pearson                      
+##  Max.   :222000000   NULL:Mark Robins                        
+##  NA's   :68803       NULL:Nigel Pearson                      
+##                      NULL:David Moyes                        
+##                      NULL:Simon Grayson                      
+##                      NULL:                                   
+##                      NULL:                                   
+##                      NULL:                                   
+##                      NULL:                                   
+##                      NULL:                                   
+##                      NULL:                                   
+##                      NULL:                                   
+##                      NULL:                                   
+##                      NULL:                                   
+##                      NULL:                                   
+##                      NULL:Mick McCarthy                      
+##                      NULL:                                   
+##                      NULL:                                   
+##                      NULL:                                   
+##                      NULL:                                   
+##                      NULL:                                   
+##                      NULL:                                   
+##                      NULL:                                   
+##                      NULL:                                   
+##                      NULL:                                   
+##                      NULL:                                   
+##                      NULL:                                   
+##                      NULL:                                   
+##                      NULL:                                   
+##                      NULL:                                   
+##                      NULL:                                   
+##                      NULL:                                   
+##                      NULL:                                   
+##                      NULL:                                   
+##                      NULL:                                   
+##                      NULL:                                   
+##                      NULL:                                   
+##                      NULL:                                   
+##                      NULL:                                   
+##                      NULL:                                   
+##                      NULL:                                   
+##                      NULL:                                   
+##                      NULL:                                   
+##                      NULL:                                   
+##                      NULL:                                   
+##                      NULL:                                   
+##                      NULL:                                   
+##                      NULL:                                   
+##  to_coach_name                            from_sport_dir_name                   
+##  NULL:                                    NULL:                                 
+##  NULL:                                    NULL:                                 
+##  NULL:                                    NULL:                                 
+##  NULL:Simon Grayson                       NULL:                                 
+##  NULL:Dougie Freedman                     NULL:                                 
+##  NULL:Nigel Pearson                       NULL:                                 
+##  NULL:Simon Grayson                       NULL:                                 
+##  NULL:Sven-GÃ¶ran Eriksson                NULL:                                 
+##  NULL:David Moyes                         NULL:Gwyn Williams                    
+##  NULL:                                    NULL:                                 
+##  NULL:                                    NULL:                                 
+##  NULL:                                    NULL:                                 
+##  NULL:                                    NULL:                                 
+##  NULL:                                    NULL:                                 
+##  NULL:                                    NULL:                                 
+##  NULL:                                    NULL:                                 
+##  NULL:                                    NULL:                                 
+##  NULL:                                    NULL:                                 
+##  NULL:                                    NULL:                                 
+##  NULL:Gary Megson                         NULL:                                 
+##  NULL:                                    NULL:                                 
+##  NULL:                                    NULL:                                 
+##  NULL:                                    NULL:                                 
+##  NULL:                                    NULL:                                 
+##  NULL:                                    NULL:                                 
+##  NULL:                                    NULL:                                 
+##  NULL:                                    NULL:                                 
+##  NULL:                                    NULL:                                 
+##  NULL:                                    NULL:                                 
+##  NULL:                                    NULL:                                 
+##  NULL:                                    NULL:                                 
+##  NULL:                                    NULL:                                 
+##  NULL:                                    NULL:                                 
+##  NULL:                                    NULL:                                 
+##  NULL:                                    NULL:                                 
+##  NULL:                                    NULL:                                 
+##  NULL:                                    NULL:                                 
+##  NULL:                                    NULL:                                 
+##  NULL:                                    NULL:                                 
+##  NULL:                                    NULL:                                 
+##  NULL:                                    NULL:                                 
+##  NULL:                                    NULL:                                 
+##  NULL:                                    NULL:                                 
+##  NULL:                                    NULL:                                 
+##  NULL:                                    NULL:                                 
+##  NULL:                                    NULL:                                 
+##  NULL:                                    NULL:                                 
+##  NULL:                                    NULL:                                 
+##  NULL:                                    NULL:                                 
+##  NULL:                                    NULL:                                 
+##  NULL:                                    NULL:                                 
+##  NULL:                                    NULL:                                 
+##  to_sport_dir_name                contract_was_till    is_loan       is_end_of_loan  
+##  NULL:                            NULL:             Min.   :0.0000   Min.   :0.0000  
+##  NULL:                            NULL:             1st Qu.:0.0000   1st Qu.:0.0000  
+##  NULL:                            NULL:             Median :0.0000   Median :0.0000  
+##  NULL:                            NULL:2015-06-30   Mean   :0.1549   Mean   :0.1547  
+##  NULL:                            NULL:2015-06-30   3rd Qu.:0.0000   3rd Qu.:0.0000  
+##  NULL:                            NULL:             Max.   :1.0000   Max.   :1.0000  
+##  NULL:                            NULL:2015-06-30                                    
+##  NULL:                            NULL:                                              
+##  NULL:                            NULL:                                              
+##  NULL:                            NULL:                                              
+##  NULL:                            NULL:                                              
+##  NULL:                            NULL:                                              
+##  NULL:                            NULL:                                              
+##  NULL:                            NULL:                                              
+##  NULL:                            NULL:                                              
+##  NULL:                            NULL:                                              
+##  NULL:                            NULL:                                              
+##  NULL:                            NULL:                                              
+##  NULL:                            NULL:                                              
+##  NULL:                            NULL:                                              
+##  NULL:                            NULL:                                              
+##  NULL:                            NULL:                                              
+##  NULL:                            NULL:                                              
+##  NULL:                            NULL:                                              
+##  NULL:                            NULL:                                              
+##  NULL:                            NULL:                                              
+##  NULL:                            NULL:                                              
+##  NULL:                            NULL:                                              
+##  NULL:                            NULL:                                              
+##  NULL:                            NULL:                                              
+##  NULL:                            NULL:                                              
+##  NULL:                            NULL:                                              
+##  NULL:                            NULL:                                              
+##  NULL:                            NULL:                                              
+##  NULL:                            NULL:                                              
+##  NULL:                            NULL:                                              
+##  NULL:                            NULL:                                              
+##  NULL:                            NULL:                                              
+##  NULL:                            NULL:                                              
+##  NULL:                            NULL:                                              
+##  NULL:                            NULL:                                              
+##  NULL:                            NULL:                                              
+##  NULL:                            NULL:                                              
+##  NULL:                            NULL:                                              
+##  NULL:                            NULL:                                              
+##  NULL:                            NULL:                                              
+##  NULL:                            NULL:                                              
+##  NULL:                            NULL:                                              
+##  NULL:                            NULL:                                              
+##  NULL:                            NULL:                                              
+##  NULL:                            NULL:                                              
+##  NULL:                            NULL:                                              
+##  is_future_transfer
+##  Min.   :0.00000   
+##  1st Qu.:0.00000   
+##  Median :0.00000   
+##  Mean   :0.00836   
+##  3rd Qu.:0.00000   
+##  Max.   :1.00000   
+##                    
+##                    
+##                    
+##                    
+##                    
+##                    
+##                    
+##                    
+##                    
+##                    
+##                    
+##                    
+##                    
+##                    
+##                    
+##                    
+##                    
+##                    
+##                    
+##                    
+##                    
+##                    
+##                    
+##                    
+##                    
+##                    
+##                    
+##                    
+##                    
+##                    
+##                    
+##                    
+##                    
+##                    
+##                    
+##                    
+##                    
+##                    
+##                    
+##                    
+##                    
+##                    
+##                    
+##                    
+##                    
+##                    
+##  [ reached getOption("max.print") -- omitted 111550 rows ]
+\end{verbatim}
+\begin{alltt}
+\hlkwd{dim}\hlstd{(transfers)}
+\end{alltt}
+\begin{verbatim}
+## [1] 111602     19
+\end{verbatim}
+\begin{alltt}
+\hlkwd{head}\hlstd{(transfers)}
+\end{alltt}
+\begin{verbatim}
+##   id player_id       player_name season       date from_club_id from_club_name to_club_id
+## 1  1         1 Jermaine Beckford   2017 2017-07-01          391     Preston NE        392
+## 2  2         1 Jermaine Beckford   2015 2015-07-01          289         Bolton        391
+## 3  3         1 Jermaine Beckford   2014 2015-06-30          391     Preston NE        289
+## 4  4         1 Jermaine Beckford   2014 2014-11-20          289         Bolton        391
+## 5  5         1 Jermaine Beckford   2013 2013-07-17          271      Leicester        289
+## 6  6         1 Jermaine Beckford   2012 2013-06-30          308   Huddersfield        271
+##   to_club_name market_value fee from_coach_name   to_coach_name from_sport_dir_name
+## 1         Bury       500000   0                                                    
+## 2   Preston NE       750000   0                                                    
+## 3       Bolton       750000  NA                                                    
+## 4   Preston NE      1200000  NA     Neil Lennon   Simon Grayson                    
+## 5       Bolton      1500000  NA   Nigel Pearson Dougie Freedman                    
+## 6    Leicester      1500000  NA     Mark Robins   Nigel Pearson                    
+##   to_sport_dir_name contract_was_till is_loan is_end_of_loan is_future_transfer
+## 1                                           0              0                  0
+## 2                                           0              0                  0
+## 3                                           0              1                  0
+## 4                          2015-06-30       1              0                  0
+## 5                          2015-06-30       0              0                  0
+## 6                                           0              1                  0
+\end{verbatim}
+\begin{alltt}
+\hlkwd{anyNA}\hlstd{(transfers)} \hlcom{# TRUE}
+\end{alltt}
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+\begin{alltt}
+\hlkwd{ExpData}\hlstd{(transfers,} \hlkwc{type}\hlstd{=}\hlnum{1}\hlstd{)} \hlcom{# Check overview of data}
+\end{alltt}
+\begin{verbatim}
+##                                           Descriptions       Value
+## 1                                   Sample size (nrow)      111602
+## 2                              No. of variables (ncol)          19
+## 3                    No. of numeric/interger variables          10
+## 4                              No. of factor variables           0
+## 5                                No. of text variables           9
+## 6                             No. of logical variables           0
+## 7                          No. of identifier variables           1
+## 8                                No. of date variables           0
+## 9             No. of zero variance variables (uniform)           0
+## 10               %. of variables having complete cases 57.89% (11)
+## 11   %. of variables having >0% and <50% missing cases  10.53% (2)
+## 12 %. of variables having >=50% and <90% missing cases  31.58% (6)
+## 13          %. of variables having >=90% missing cases      0% (0)
+\end{verbatim}
+\begin{alltt}
+\hlkwd{ExpData}\hlstd{(transfers,} \hlkwc{type}\hlstd{=}\hlnum{2}\hlstd{)} \hlcom{# Check structure of data}
+\end{alltt}
+\begin{verbatim}
+##    Index       Variable_Name Variable_Type Per_of_Missing No_of_distinct_values
+## 1      1                  id       integer        0.00000                111602
+## 2      2           player_id       integer        0.00000                 11382
+## 3      3         player_name     character        0.00000                 11169
+## 4      4              season       integer        0.00000                    37
+## 5      5                date     character        0.00065                  4870
+## 6      6        from_club_id       integer        0.00000                  8925
+## 7      7      from_club_name     character        0.00000                  9165
+## 8      8          to_club_id       integer        0.00000                  6903
+## 9      9        to_club_name     character        0.00000                  7157
+## 10    10        market_value       numeric        0.34957                   258
+## 11    11                 fee       numeric        0.61650                   916
+## 12    12     from_coach_name     character        0.65335                  3552
+## 13    13       to_coach_name     character        0.65332                  3215
+## 14    14 from_sport_dir_name     character        0.84002                  1066
+## 15    15   to_sport_dir_name     character        0.83669                  1030
+## 16    16   contract_was_till     character        0.84211                   318
+## 17    17             is_loan       integer        0.00000                     2
+## 18    18      is_end_of_loan       integer        0.00000                     2
+## 19    19  is_future_transfer       integer        0.00000                     2
+\end{verbatim}
+\begin{alltt}
+\hlkwd{View}\hlstd{(dict_leagues)}
+\hlkwd{summary}\hlstd{(dict_leagues)}
+\end{alltt}
+\begin{verbatim}
+##        id          name                                        
+##  Min.   : 1.00   NULL:Premier League                           
+##  1st Qu.:13.75   NULL:LaLiga                                   
+##  Median :26.50   NULL:Serie A                                  
+##  Mean   :29.60   NULL:Bundesliga                               
+##  3rd Qu.:46.25   NULL:Ligue 1                                  
+##  Max.   :59.00   NULL:Liga NOS                                 
+##                  NULL:Eredivisie                               
+##                  NULL:Premier Liga                             
+##                  NULL:Jupiler Pro League                       
+##                  NULL:SÃ¼per Lig                               
+##                  NULL:Super League                             
+##                  NULL:Bundesliga                               
+##                  NULL:Premier Liga                             
+##                  NULL:Super League                             
+##                  NULL:Scottish Premiership                     
+##                  NULL:Fortuna Liga                             
+##                  NULL:SuperLiga                                
+##                  NULL:Liga 1                                   
+##                  NULL:Ekstraklasa                              
+##                  NULL:Alka Superligaen                         
+##                  NULL:Allsvenskan                              
+##                  NULL:1.HNL                                    
+##                  NULL:Parva Liga                               
+##                  NULL:Ligat ha'Al                              
+##                  NULL:First Division                           
+##                  NULL:Eliteserien                              
+##                  NULL:Premier Liga                             
+##                  NULL:Nemzeti BajnoksÃ¡g                       
+##                  NULL:Primera DivisiÃ³n                        
+##                  NULL:Campeonato Brasileiro SÃ©rie A           
+##                  NULL:Liga MX Clausura                         
+##                  NULL:Liga MX Apertura                         
+##                  NULL:Major League Soccer                      
+##                  NULL:Liguilla Apertura                        
+##                  NULL:Liga Ã\201guila I                           
+##                  NULL:LigaPro Serie A                          
+##                  NULL:Campeonato Scotiabank Primera DivisiÃ³n  
+##                  NULL:Chinese Super League                     
+##                  NULL:Saudi Professional League                
+##                  NULL:J1 League                                
+##                  NULL:K League 1                               
+##                  NULL:Persian Gulf Pro League                  
+##                  NULL:Qatar Stars League                       
+##                  NULL:UAE Arabian Gulf League                  
+##                  NULL:Egyptian Premier League                  
+##                  NULL:Botola Maroc Telecom                     
+##                  NULL:ABSA Premiership                         
+##                  NULL:Champions League                         
+##                  NULL:Champions League Qualifying              
+##                  NULL:Europa League                            
+##                  NULL:Europa League Qualifying                 
+##                  NULL:Others                                   
+##  country                     country_id      num           evaluation       
+##  NULL:England                NULL:GBR   Min.   :0.0000   Min.   :1.002e+08  
+##  NULL:Spain                  NULL:ESP   1st Qu.:1.0000   1st Qu.:1.436e+08  
+##  NULL:Italy                  NULL:ITA   Median :1.0000   Median :2.702e+08  
+##  NULL:Germany                NULL:DEU   Mean   :0.9038   Mean   :8.550e+08  
+##  NULL:France                 NULL:FRA   3rd Qu.:1.0000   3rd Qu.:6.443e+08  
+##  NULL:Portugal               NULL:PRT   Max.   :1.0000   Max.   :8.270e+09  
+##  NULL:Netherlands            NULL:NLD                    NA's   :5          
+##  NULL:Russia                 NULL:RUS                                       
+##  NULL:Belgium                NULL:BEL                                       
+##  NULL:Turkey                 NULL:TUR                                       
+##  NULL:Greece                 NULL:GRC                                       
+##  NULL:Austria                NULL:AUT                                       
+##  NULL:Ukraine                NULL:UKR                                       
+##  NULL:Switzerland            NULL:CHE                                       
+##  NULL:Scotland               NULL:GBR                                       
+##  NULL:Czech Republic         NULL:CZE                                       
+##  NULL:Serbia                 NULL:SRB                                       
+##  NULL:Romania                NULL:ROU                                       
+##  NULL:Poland                 NULL:POL                                       
+##  NULL:Denmark                NULL:DNK                                       
+##  NULL:Sweden                 NULL:SWE                                       
+##  NULL:Croatia                NULL:HRV                                       
+##  NULL:Bulgaria               NULL:BGR                                       
+##  NULL:Israel                 NULL:ISR                                       
+##  NULL:Cyprus                 NULL:CYP                                       
+##  NULL:Norway                 NULL:NOR                                       
+##  NULL:Kazakhstan             NULL:KAZ                                       
+##  NULL:Hungary                NULL:HUN                                       
+##  NULL:Argentina              NULL:ARG                                       
+##  NULL:Brazil                 NULL:BRA                                       
+##  NULL:Mexico                 NULL:MEX                                       
+##  NULL:Mexico                 NULL:MEX                                       
+##  NULL:United States          NULL:USA                                       
+##  NULL:Mexico                 NULL:MEX                                       
+##  NULL:Colombia               NULL:COL                                       
+##  NULL:Ecuador                NULL:ECU                                       
+##  NULL:Chile                  NULL:CHL                                       
+##  NULL:China                  NULL:CHN                                       
+##  NULL:Saudi Arabia           NULL:SAU                                       
+##  NULL:Japan                  NULL:JPN                                       
+##  NULL:Korea, South           NULL:KOR                                       
+##  NULL:Iran                   NULL:IRN                                       
+##  NULL:Qatar                  NULL:QAT                                       
+##  NULL:United Arab Emirates   NULL:ARE                                       
+##  NULL:Egypt                  NULL:EGY                                       
+##  NULL:Morocco                NULL:MAR                                       
+##  NULL:South Africa           NULL:ZAF                                       
+##  NULL:Europe                 NULL:                                          
+##  NULL:Europe                 NULL:                                          
+##  NULL:Europe                 NULL:                                          
+##  NULL:Europe                 NULL:                                          
+##  NULL:All                    NULL:                                          
+##      group       
+##  Min.   : 1.000  
+##  1st Qu.: 4.000  
+##  Median : 5.000  
+##  Mean   : 4.788  
+##  3rd Qu.: 6.000  
+##  Max.   :10.000  
+##                  
+##                  
+##                  
+##                  
+##                  
+##                  
+##                  
+##                  
+##                  
+##                  
+##                  
+##                  
+##                  
+##                  
+##                  
+##                  
+##                  
+##                  
+##                  
+##                  
+##                  
+##                  
+##                  
+##                  
+##                  
+##                  
+##                  
+##                  
+##                  
+##                  
+##                  
+##                  
+##                  
+##                  
+##                  
+##                  
+##                  
+##                  
+##                  
+##                  
+##                  
+##                  
+##                  
+##                  
+##                  
+## 
+\end{verbatim}
+\begin{alltt}
+\hlkwd{dim}\hlstd{(dict_leagues)}
+\end{alltt}
+\begin{verbatim}
+## [1] 52  7
+\end{verbatim}
+\begin{alltt}
+\hlkwd{head}\hlstd{(dict_leagues)}
+\end{alltt}
+\begin{verbatim}
+##   id           name  country country_id num evaluation group
+## 1  1 Premier League  England        GBR   1   8.27e+09     1
+## 2  2         LaLiga    Spain        ESP   1   5.53e+09     1
+## 3  3        Serie A    Italy        ITA   1   4.70e+09     2
+## 4  4     Bundesliga  Germany        DEU   1   4.29e+09     2
+## 5  5        Ligue 1   France        FRA   1   3.33e+09     2
+## 6  6       Liga NOS Portugal        PRT   1   1.06e+09     3
+\end{verbatim}
+\begin{alltt}
+\hlkwd{anyNA}\hlstd{(dict_leagues)} \hlcom{# TRUE}
+\end{alltt}
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+\begin{alltt}
+\hlkwd{ExpData}\hlstd{(dict_leagues,} \hlkwc{type}\hlstd{=}\hlnum{1}\hlstd{)} \hlcom{# Check overview of data}
+\end{alltt}
+\begin{verbatim}
+##                                           Descriptions      Value
+## 1                                   Sample size (nrow)         52
+## 2                              No. of variables (ncol)          7
+## 3                    No. of numeric/interger variables          4
+## 4                              No. of factor variables          0
+## 5                                No. of text variables          3
+## 6                             No. of logical variables          0
+## 7                          No. of identifier variables          1
+## 8                                No. of date variables          0
+## 9             No. of zero variance variables (uniform)          0
+## 10               %. of variables having complete cases 71.43% (5)
+## 11   %. of variables having >0% and <50% missing cases 28.57% (2)
+## 12 %. of variables having >=50% and <90% missing cases     0% (0)
+## 13          %. of variables having >=90% missing cases     0% (0)
+\end{verbatim}
+\begin{alltt}
+\hlkwd{ExpData}\hlstd{(dict_leagues,} \hlkwc{type}\hlstd{=}\hlnum{2}\hlstd{)} \hlcom{# Check structure of data}
+\end{alltt}
+\begin{verbatim}
+##   Index Variable_Name Variable_Type Per_of_Missing No_of_distinct_values
+## 1     1            id       integer        0.00000                    52
+## 2     2          name     character        0.00000                    48
+## 3     3       country     character        0.00000                    47
+## 4     4    country_id     character        0.09615                    45
+## 5     5           num       integer        0.00000                     2
+## 6     6    evaluation       numeric        0.09615                    47
+## 7     7         group       integer        0.00000                     7
+\end{verbatim}
+\begin{alltt}
+\hlkwd{View}\hlstd{(dict_clubs)}
+\hlkwd{summary}\hlstd{(dict_clubs)}
+\end{alltt}
+\begin{verbatim}
+##        id         name                                         
+##  Min.   :   1   NULL:Bayern Munich                             
+##  1st Qu.:2346   NULL:Bay. Leverkusen                           
+##  Median :4691   NULL:Hamburger SV                              
+##  Mean   :4691   NULL:1860 Munich                               
+##  3rd Qu.:7036   NULL:1.FC K'lautern                            
+##  Max.   :9381   NULL:Hertha BSC                                
+##                 NULL:VfL Wolfsburg                             
+##                 NULL:VfB Stuttgart                             
+##                 NULL:Werder Bremen                             
+##                 NULL:Unterhaching                              
+##                 NULL:Bor. Dortmund                             
+##                 NULL:SC Freiburg                               
+##                 NULL:FC Schalke 04                             
+##                 NULL:E. Frankfurt                              
+##                 NULL:Hansa Rostock                             
+##                 NULL:SSV Ulm 1846                              
+##                 NULL:Arm. Bielefeld                            
+##                 NULL:MSV Duisburg                              
+##                 NULL:1. FC KÃ¶ln                               
+##                 NULL:Energie Cottbus                           
+##                 NULL:VfL Bochum                                
+##                 NULL:Bor. M'gladbach                           
+##                 NULL:1.FC Nuremberg                            
+##                 NULL:FC St. Pauli                              
+##                 NULL:Hannover 96                               
+##                 NULL:1.FSV Mainz 05                            
+##                 NULL:Alem. Aachen                              
+##                 NULL:Karlsruher SC                             
+##                 NULL:TSG Hoffenheim                            
+##                 NULL:FC Augsburg                               
+##                 NULL:F. DÃ¼sseldorf                            
+##                 NULL:Greuther FÃ¼rth                           
+##                 NULL:E. Braunschweig                           
+##                 NULL:SC Paderborn                              
+##                 NULL:FC Ingolstadt                             
+##                 NULL:SV Darmstadt 98                           
+##                 NULL:RB Leipzig                                
+##                 NULL:Monaco                                    
+##                 NULL:Paris SG                                  
+##                 NULL:Olympique Lyon                            
+##                 NULL:G. Bordeaux                               
+##                 NULL:Lens                                      
+##                 NULL:Saint-Ã‰tienne                            
+##                 NULL:CS Sedan                                  
+##                 NULL:AJ Auxerre                                
+##                 NULL:R. Strasbourg                             
+##                 NULL:SC Bastia                                 
+##                 NULL:FC Metz                                   
+##                 NULL:FC Nantes                                 
+##                 NULL:Stade Rennais                             
+##                 NULL:Troyes                                    
+##                 NULL:Marseille                                 
+##                 NULL:AS Nancy                                  
+##                 NULL:AC Le Havre                               
+##                 NULL:Montpellier                               
+##                 NULL:LOSC Lille                                
+##                 NULL:Guingamp                                  
+##                 NULL:Toulouse                                  
+##                 NULL:FC Sochaux                                
+##                 NULL:FC Lorient                                
+##                 NULL:OGC Nice                                  
+##                 NULL:AC Ajaccio                                
+##                 NULL:Le Mans UC 72                             
+##                 NULL:SM Caen                                   
+##                 NULL:FC Istres                                 
+##                 NULL:Valenciennes FC                           
+##                 NULL:Grenoble                                  
+##                 NULL:US Boulogne                               
+##                 NULL:Stade Brest 29                            
+##                 NULL:AC Arles                                  
+##                 NULL:Ã‰vian                                    
+##                 NULL:Dijon                                     
+##                 NULL:Reims                                     
+##                 NULL:SCO Angers                                
+##                 NULL:G. Ajaccio                                
+##                 NULL:SC Amiens                                 
+##                 NULL:NÃ®mes Olympique                          
+##                 NULL:Dep. La CoruÃ±a                           
+##                 NULL:FC Barcelona                              
+##                 NULL:Valencia                                  
+##                 NULL:Real Zaragoza                             
+##                 NULL:Real Madrid                               
+##                 NULL:AlavÃ©s                                   
+##                 NULL:Celta de Vigo                             
+##                 NULL:Real Valladolid                           
+##                 NULL:Rayo Vallecano                            
+##                 NULL:RCD Mallorca                              
+##                 NULL:Athletic                                  
+##                 NULL:MÃ¡laga CF                                
+##                 NULL:Real Sociedad                             
+##                 NULL:Espanyol                                  
+##                 NULL:Racing                                    
+##                 NULL:Real Oviedo                               
+##                 NULL:CD Numancia                               
+##                 NULL:Real Betis                                
+##                 NULL:AtlÃ©tico Madrid                          
+##                 NULL:Sevilla FC                                
+##                 NULL:Villarreal                                
+##                 NULL:UD Las Palmas                             
+##                 NULL:CA Osasuna                                
+##                 NULL:CD Tenerife                               
+##                 NULL:Recr. Huelva                              
+##                 NULL:Albacete                                  
+##                 NULL:Real Murcia                               
+##                 NULL:Getafe                                    
+##                 NULL:Levante                                   
+##                 NULL:CÃ¡diz CF                                 
+##                 NULL:GimnÃ stic                                
+##                 NULL:UD AlmerÃ­a                               
+##                 NULL:Sporting GijÃ³n                           
+##                 NULL:Xerez CD                                  
+##                 NULL:HÃ©rcules CF                              
+##                 NULL:Granada CF                                
+##                 NULL:Elche CF                                  
+##                 NULL:SD Eibar                                  
+##                 NULL:CÃ³rdoba CF                               
+##                 NULL:CD LeganÃ©s                               
+##                 NULL:Girona                                    
+##                 NULL:SD Huesca                                 
+##                 NULL:Galatasaray                               
+##                 NULL:Besiktas                                  
+##                 NULL:Gaziantepspor                             
+##                 NULL:Fenerbahce                                
+##                 NULL:Genclerbirligi                            
+##                 NULL:Trabzonspor                               
+##  off_name                                 country_id   city                    
+##  NULL:Bayern Munich                       NULL:DEU   NULL:                     
+##  NULL:Bayer 04 Leverkusen                 NULL:DEU   NULL:                     
+##  NULL:Hamburger SV                        NULL:DEU   NULL:                     
+##  NULL:TSV 1860 Munich                     NULL:DEU   NULL:                     
+##  NULL:1.FC Kaiserslautern                 NULL:DEU   NULL:                     
+##  NULL:Hertha BSC                          NULL:DEU   NULL:                     
+##  NULL:VfL Wolfsburg                       NULL:DEU   NULL:                     
+##  NULL:VfB Stuttgart                       NULL:DEU   NULL:                     
+##  NULL:SV Werder Bremen                    NULL:DEU   NULL:Bremen               
+##  NULL:SpVgg Unterhaching                  NULL:DEU   NULL:                     
+##  NULL:Borussia Dortmund                   NULL:DEU   NULL:                     
+##  NULL:SC Freiburg                         NULL:DEU   NULL:Freiburg             
+##  NULL:FC Schalke 04                       NULL:DEU   NULL:                     
+##  NULL:Eintracht Frankfurt                 NULL:DEU   NULL:Frankfurt nad Menem  
+##  NULL:FC Hansa Rostock                    NULL:DEU   NULL:Rostock              
+##  NULL:SSV Ulm 1846                        NULL:DEU   NULL:                     
+##  NULL:Arminia Bielefeld                   NULL:DEU   NULL:Bielefeld            
+##  NULL:MSV Duisburg                        NULL:DEU   NULL:Duisburg             
+##  NULL:1. FC KÃ¶ln                         NULL:DEU   NULL:Cologne              
+##  NULL:FC Energie Cottbus                  NULL:DEU   NULL:ChociebuÅ¼           
+##  NULL:VfL Bochum                          NULL:DEU   NULL:                     
+##  NULL:Borussia MÃ¶nchengladbach           NULL:DEU   NULL:                     
+##  NULL:1.FC Nuremberg                      NULL:DEU   NULL:                     
+##  NULL:FC St. Pauli                        NULL:DEU   NULL:                     
+##  NULL:Hannover 96                         NULL:DEU   NULL:                     
+##  NULL:1.FSV Mainz 05                      NULL:DEU   NULL:                     
+##  NULL:Alemannia Aachen                    NULL:DEU   NULL:                     
+##  NULL:Karlsruher SC                       NULL:DEU   NULL:Karlsruhe            
+##  NULL:TSG 1899 Hoffenheim                 NULL:DEU   NULL:                     
+##  NULL:FC Augsburg                         NULL:DEU   NULL:Augsburg             
+##  NULL:Fortuna DÃ¼sseldorf                 NULL:DEU   NULL:DÃ¼sseldorf          
+##  NULL:SpVgg Greuther FÃ¼rth               NULL:DEU   NULL:FÃ¼rth               
+##  NULL:Eintracht Braunschweig              NULL:DEU   NULL:                     
+##  NULL:SC Paderborn 07                     NULL:DEU   NULL:Paderborn            
+##  NULL:FC Ingolstadt 04                    NULL:DEU   NULL:                     
+##  NULL:SV Darmstadt 98                     NULL:DEU   NULL:                     
+##  NULL:RB Leipzig                          NULL:DEU   NULL:Leipzig              
+##  NULL:AS Monaco                           NULL:FRA   NULL:Monaco               
+##  NULL:Paris Saint-Germain                 NULL:FRA   NULL:                     
+##  NULL:Olympique Lyon                      NULL:FRA   NULL:                     
+##  NULL:FC Girondins Bordeaux               NULL:FRA   NULL:                     
+##  NULL:RC Lens                             NULL:FRA   NULL:Lens                 
+##  NULL:AS Saint-Ã‰tienne                   NULL:FRA   NULL:Saint-Ã‰tienne       
+##  NULL:CS Sedan-Ardennes                   NULL:FRA   NULL:                     
+##  NULL:AJ Auxerre                          NULL:FRA   NULL:                     
+##  NULL:RC Strasbourg Alsace                NULL:FRA   NULL:                     
+##  NULL:SC Bastia                           NULL:FRA   NULL:Furiani              
+##  NULL:FC Metz                             NULL:FRA   NULL:                     
+##  NULL:FC Nantes                           NULL:FRA   NULL:                     
+##  NULL:Stade Rennais FC                    NULL:FRA   NULL:Rennes               
+##  NULL:ES Troyes AC                        NULL:FRA   NULL:Troyes               
+##  NULL:Olympique Marseille                 NULL:FRA   NULL:Marseille            
+##  NULL:AS Nancy-Lorraine                   NULL:FRA   NULL:Nancy                
+##  NULL:AC Le Havre                         NULL:FRA   NULL:                     
+##  NULL:HSC Montpellier                     NULL:FRA   NULL:Montpellier          
+##  NULL:LOSC Lille                          NULL:FRA   NULL:                     
+##  NULL:EA Guingamp                         NULL:FRA   NULL:                     
+##  NULL:FC Toulouse                         NULL:FRA   NULL:Toulouse             
+##  NULL:FC Sochaux-MontbÃ©liard             NULL:FRA   NULL:MontbÃ©liard         
+##  NULL:FC Lorient                          NULL:FRA   NULL:Lorient              
+##  NULL:OGC Nice                            NULL:FRA   NULL:Nice                 
+##  NULL:AC Ajaccio                          NULL:FRA   NULL:Ajaccio              
+##  NULL:Le Mans Union Club 72               NULL:FRA   NULL:                     
+##  NULL:SM Caen                             NULL:FRA   NULL:Caen                 
+##  NULL:FC Istres Ouest Provence            NULL:FRA   NULL:                     
+##  NULL:Valenciennes FC                     NULL:FRA   NULL:Valenciennes         
+##  NULL:Grenoble Foot 38                    NULL:FRA   NULL:Grenoble             
+##  NULL:US Boulogne                         NULL:FRA   NULL:Boulogne-sur-Mer     
+##  NULL:Stade Brest 29                      NULL:FRA   NULL:                     
+##  NULL:AthlÃ©tic Club ArlÃ©sien            NULL:FRA   NULL:                     
+##  NULL:FC Ã‰vian Thonon Gaillard           NULL:FRA   NULL:                     
+##  NULL:FCO Dijon                           NULL:FRA   NULL:Dijon                
+##  NULL:Stade Reims                         NULL:FRA   NULL:Reims                
+##  NULL:SCO Angers                          NULL:FRA   NULL:                     
+##  NULL:GFC Ajaccio                         NULL:FRA   NULL:                     
+##  NULL:SC Amiens                           NULL:FRA   NULL:                     
+##  NULL:NÃ®mes Olympique                    NULL:FRA   NULL:                     
+##  NULL:Deportivo de La CoruÃ±a             NULL:ESP   NULL:                     
+##  NULL:FC Barcelona                        NULL:ESP   NULL:                     
+##  NULL:Valencia CF                         NULL:ESP   NULL:Valencia             
+##  NULL:Real Zaragoza                       NULL:ESP   NULL:Zaragoza             
+##  NULL:Real Madrid                         NULL:ESP   NULL:Madrid               
+##  NULL:Deportivo AlavÃ©s                   NULL:ESP   NULL:                     
+##  NULL:Celta de Vigo                       NULL:ESP   NULL:Vigo                 
+##  NULL:Real Valladolid CF                  NULL:ESP   NULL:Valladolid           
+##  NULL:Rayo Vallecano                      NULL:ESP   NULL:Madrid               
+##  NULL:RCD Mallorca                        NULL:ESP   NULL:                     
+##  NULL:Athletic Bilbao                     NULL:ESP   NULL:Bilbao               
+##  NULL:MÃ¡laga CF                          NULL:ESP   NULL:                     
+##  NULL:Real Sociedad                       NULL:ESP   NULL:San Sebastian        
+##  NULL:RCD Espanyol Barcelona              NULL:ESP   NULL:Barcelona            
+##  NULL:Racing Santander                    NULL:ESP   NULL:Paris                
+##  NULL:Real Oviedo                         NULL:ESP   NULL:Oviedo               
+##  NULL:CD Numancia                         NULL:ESP   NULL:Soria                
+##  NULL:Real Betis BalompiÃ©                NULL:ESP   NULL:Sevilla              
+##  NULL:AtlÃ©tico Madrid                    NULL:ESP   NULL:Madrid               
+##  NULL:Sevilla FC                          NULL:ESP   NULL:                     
+##  NULL:Villarreal CF                       NULL:ESP   NULL:                     
+##  NULL:UD Las Palmas                       NULL:ESP   NULL:Las Palmas           
+##  NULL:CA Osasuna                          NULL:ESP   NULL:                     
+##  NULL:CD Tenerife                         NULL:ESP   NULL:                     
+##  NULL:Recreativo Huelva                   NULL:ESP   NULL:Huelva               
+##  NULL:Albacete BalompiÃ©                  NULL:ESP   NULL:Albacete             
+##  NULL:Real Murcia CF                      NULL:ESP   NULL:Murcia               
+##  NULL:Getafe CF                           NULL:ESP   NULL:Getafe               
+##  NULL:Levante UD                          NULL:ESP   NULL:Valencia             
+##  NULL:CÃ¡diz CF                           NULL:ESP   NULL:                     
+##  NULL:GimnÃ stic de Tarragona             NULL:ESP   NULL:                     
+##  NULL:UD AlmerÃ­a                         NULL:ESP   NULL:                     
+##  NULL:Sporting GijÃ³n                     NULL:ESP   NULL:                     
+##  NULL:Xerez CD                            NULL:ESP   NULL:                     
+##  NULL:HÃ©rcules CF                        NULL:ESP   NULL:Alicante             
+##  NULL:Granada CF                          NULL:ESP   NULL:Granada              
+##  NULL:Elche CF                            NULL:ESP   NULL:                     
+##  NULL:SD Eibar                            NULL:ESP   NULL:Eibar                
+##  NULL:CÃ³rdoba CF                         NULL:ESP   NULL:Cordoba              
+##  NULL:CD LeganÃ©s                         NULL:ESP   NULL:LeganÃ©s             
+##  NULL:Girona FC                           NULL:ESP   NULL:                     
+##  NULL:SD Huesca                           NULL:ESP   NULL:                     
+##  NULL:Galatasaray SK                      NULL:TUR   NULL:Istanbul             
+##  NULL:Besiktas JK                         NULL:TUR   NULL:                     
+##  NULL:Gaziantepspor                       NULL:TUR   NULL:Gaziantep            
+##  NULL:Fenerbahce SK                       NULL:TUR   NULL:                     
+##  NULL:Genclerbirligi Ankara               NULL:TUR   NULL:                     
+##  NULL:Trabzonspor                         NULL:TUR   NULL:Trabzon              
+##  stadium                                      stadium_id     is_first_team   
+##  NULL:                                      Min.   :   5.0   Min.   :0.0000  
+##  NULL:                                      1st Qu.: 498.0   1st Qu.:0.0000  
+##  NULL:                                      Median : 859.0   Median :1.0000  
+##  NULL:                                      Mean   : 979.5   Mean   :0.6382  
+##  NULL:                                      3rd Qu.:1536.0   3rd Qu.:1.0000  
+##  NULL:                                      Max.   :2024.0   Max.   :1.0000  
+##  NULL:                                      NA's   :8864                     
+##  NULL:                                                                       
+##  NULL:Weserstadion                                                           
+##  NULL:                                                                       
+##  NULL:                                                                       
+##  NULL:Schwarzwald-Stadion                                                    
+##  NULL:                                                                       
+##  NULL:Commerzbank Arena                                                      
+##  NULL:DKB Arena                                                              
+##  NULL:                                                                       
+##  NULL:SchÃ¼co Arena                                                          
+##  NULL:Schauinsland-Reisen-Arena                                              
+##  NULL:Franz-Kremer-Stadion                                                   
+##  NULL:Stadion der Freundschaft                                               
+##  NULL:                                                                       
+##  NULL:                                                                       
+##  NULL:                                                                       
+##  NULL:                                                                       
+##  NULL:                                                                       
+##  NULL:                                                                       
+##  NULL:                                                                       
+##  NULL:Wildparkstadion                                                        
+##  NULL:                                                                       
+##  NULL:Rosenaustadion                                                         
+##  NULL:Merkur Spiel-Arena                                                     
+##  NULL:Sportpark Ronhof                                                       
+##  NULL:                                                                       
+##  NULL:Benteler-Arena                                                         
+##  NULL:                                                                       
+##  NULL:                                                                       
+##  NULL:Red Bull Arena                                                         
+##  NULL:Stade Louis II                                                         
+##  NULL:                                                                       
+##  NULL:                                                                       
+##  NULL:                                                                       
+##  NULL:Stade Bollaert-Delelis                                                 
+##  NULL:Stade Geoffroy-Guichard                                                
+##  NULL:                                                                       
+##  NULL:                                                                       
+##  NULL:                                                                       
+##  NULL:Stade Armand-Cesari                                                    
+##  NULL:                                                                       
+##  NULL:                                                                       
+##  NULL:Roazhon Park                                                           
+##  NULL:Stade de lâ\200\231Aube                                                      
+##  NULL:Orange VÃ©lodrome                                                      
+##  NULL:Stade Marcel Picot                                                     
+##  NULL:                                                                       
+##  NULL:Stade de la Mosson                                                     
+##  NULL:                                                                       
+##  NULL:                                                                       
+##  NULL:Stadium de Toulouse                                                    
+##  NULL:Stade Auguste Bonal                                                    
+##  NULL:Stade du Moustoir                                                      
+##  NULL:Allianz Riviera                                                        
+##  NULL:Stade FranÃ§ois-Coty                                                   
+##  NULL:                                                                       
+##  NULL:Stade Michel dâ\200\231Ornano                                                
+##  NULL:                                                                       
+##  NULL:Stade du Hainaut                                                       
+##  NULL:Stade des Alpes                                                        
+##  NULL:Stade de la LibÃ©ration                                                
+##  NULL:                                                                       
+##  NULL:                                                                       
+##  NULL:                                                                       
+##  NULL:Stade Gaston-GÃ©rard                                                   
+##  NULL:Stade Auguste-Delaune                                                  
+##  NULL:                                                                       
+##  NULL:                                                                       
+##  NULL:                                                                       
+##  NULL:                                                                       
+##  NULL:                                                                       
+##  NULL:                                                                       
+##  NULL:Estadio Mestalla                                                       
+##  NULL:Estadio de La Romareda                                                 
+##  NULL:Estadio Santiago BernabÃ©u                                             
+##  NULL:                                                                       
+##  NULL:Abanca BalaÃ­dos                                                       
+##  NULL:Estadio JosÃ© Zorrilla                                                 
+##  NULL:Campo de FÃºtbol de Vallecas                                           
+##  NULL:                                                                       
+##  NULL:San MamÃ©s Barria                                                      
+##  NULL:                                                                       
+##  NULL:Estadio Anoeta                                                         
+##  NULL:RCDE Stadium                                                           
+##  NULL:U Arena                                                                
+##  NULL:Estadio Carlos Tartiere                                                
+##  NULL:Nuevo Estadio Los Pajaritos                                            
+##  NULL:Estadio Benito VillamarÃ­n                                             
+##  NULL:Wanda Metropolitano                                                    
+##  NULL:                                                                       
+##  NULL:                                                                       
+##  NULL:Estadio Gran Canaria                                                   
+##  NULL:                                                                       
+##  NULL:                                                                       
+##  NULL:Estadio Nuevo Colombino                                                
+##  NULL:Estadio Carlos Belmonte                                                
+##  NULL:Estadio Nueva Condomina                                                
+##  NULL:Coliseum Alfonso PÃ©rez                                                
+##  NULL:Estadi Ciutat de Valencia                                              
+##  NULL:                                                                       
+##  NULL:                                                                       
+##  NULL:                                                                       
+##  NULL:                                                                       
+##  NULL:                                                                       
+##  NULL:Estadio JosÃ© Rico PÃ©rez                                              
+##  NULL:Estadio Nuevo Los CÃ¡rmenes                                            
+##  NULL:                                                                       
+##  NULL:Estadio IpurÃºa                                                        
+##  NULL:Estadio Nuevo  ArcÃ¡ngel                                               
+##  NULL:Estadio de Butarque                                                    
+##  NULL:                                                                       
+##  NULL:                                                                       
+##  NULL:TÃ¼rk Telekom Stadium                                                  
+##  NULL:                                                                       
+##  NULL:Gaziantep Stadyumu                                                     
+##  NULL:                                                                       
+##  NULL:                                                                       
+##  NULL:MedicalPark Stadyumu                                                   
+##  [ reached getOption("max.print") -- omitted 9256 rows ]
+\end{verbatim}
+\begin{alltt}
+\hlkwd{dim}\hlstd{(dict_clubs)}
+\end{alltt}
+\begin{verbatim}
+## [1] 9381    8
+\end{verbatim}
+\begin{alltt}
+\hlkwd{head}\hlstd{(dict_clubs)}
+\end{alltt}
+\begin{verbatim}
+##   id            name            off_name country_id city stadium stadium_id is_first_team
+## 1  1  Bayern Munich        Bayern Munich        DEU                      NA             1
+## 2  2 Bay. Leverkusen Bayer 04 Leverkusen        DEU                      NA             1
+## 3  3    Hamburger SV        Hamburger SV        DEU                      NA             1
+## 4  4     1860 Munich     TSV 1860 Munich        DEU                      NA             1
+## 5  5  1.FC K'lautern 1.FC Kaiserslautern        DEU                      NA             1
+## 6  6      Hertha BSC          Hertha BSC        DEU                      NA             1
+\end{verbatim}
+\begin{alltt}
+\hlkwd{anyNA}\hlstd{(dict_clubs)} \hlcom{# TRUE}
+\end{alltt}
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+\begin{alltt}
+\hlkwd{ExpData}\hlstd{(dict_clubs,} \hlkwc{type}\hlstd{=}\hlnum{1}\hlstd{)} \hlcom{# Check overview of data}
+\end{alltt}
+\begin{verbatim}
+##                                           Descriptions     Value
+## 1                                   Sample size (nrow)      9381
+## 2                              No. of variables (ncol)         8
+## 3                    No. of numeric/interger variables         3
+## 4                              No. of factor variables         0
+## 5                                No. of text variables         5
+## 6                             No. of logical variables         0
+## 7                          No. of identifier variables         1
+## 8                                No. of date variables         0
+## 9             No. of zero variance variables (uniform)         0
+## 10               %. of variables having complete cases 37.5% (3)
+## 11   %. of variables having >0% and <50% missing cases    0% (0)
+## 12 %. of variables having >=50% and <90% missing cases    0% (0)
+## 13          %. of variables having >=90% missing cases 62.5% (5)
+\end{verbatim}
+\begin{alltt}
+\hlkwd{ExpData}\hlstd{(dict_clubs,} \hlkwc{type}\hlstd{=}\hlnum{2}\hlstd{)} \hlcom{# Check structure of data}
+\end{alltt}
+\begin{verbatim}
+##   Index Variable_Name Variable_Type Per_of_Missing No_of_distinct_values
+## 1     1            id       integer        0.00000                  9381
+## 2     2          name     character        0.00000                  9295
+## 3     3      off_name     character        0.95843                   391
+## 4     4    country_id     character        0.95843                    11
+## 5     5          city     character        0.94489                   436
+## 6     6       stadium     character        0.94489                   480
+## 7     7    stadium_id       numeric        0.94489                   485
+## 8     8 is_first_team       integer        0.00000                     2
+\end{verbatim}
+\begin{alltt}
+\hlkwd{View}\hlstd{(clubs_in_leagues)}
+\hlkwd{summary}\hlstd{(clubs_in_leagues)}
+\end{alltt}
+\begin{verbatim}
+##        X                id            club_id      club_name               
+##  Min.   :   0.0   Min.   :   1.0   Min.   :  1.0   NULL:Bayern Munich      
+##  1st Qu.: 894.2   1st Qu.: 895.2   1st Qu.: 87.0   NULL:Bay. Leverkusen    
+##  Median :1788.5   Median :1789.5   Median :184.0   NULL:Hamburger SV       
+##  Mean   :1788.5   Mean   :1789.5   Mean   :183.7   NULL:1860 Munich        
+##  3rd Qu.:2682.8   3rd Qu.:2683.8   3rd Qu.:273.0   NULL:1.FC K'lautern     
+##  Max.   :3577.0   Max.   :3578.0   Max.   :390.0   NULL:Hertha BSC         
+##                                                    NULL:VfL Wolfsburg      
+##                                                    NULL:VfB Stuttgart      
+##                                                    NULL:Werder Bremen      
+##                                                    NULL:Unterhaching       
+##                                                    NULL:Bor. Dortmund      
+##                                                    NULL:SC Freiburg        
+##                                                    NULL:FC Schalke 04      
+##                                                    NULL:E. Frankfurt       
+##                                                    NULL:Hansa Rostock      
+##                                                    NULL:SSV Ulm 1846       
+##                                                    NULL:Arm. Bielefeld     
+##                                                    NULL:MSV Duisburg       
+##                                                    NULL:Bayern Munich      
+##                                                    NULL:FC Schalke 04      
+##                                                    NULL:Bor. Dortmund      
+##                                                    NULL:Bay. Leverkusen    
+##                                                    NULL:Hertha BSC         
+##                                                    NULL:SC Freiburg        
+##                                                    NULL:Werder Bremen      
+##                                                    NULL:1.FC K'lautern     
+##                                                    NULL:VfL Wolfsburg      
+##                                                    NULL:1. FC KÃ¶ln        
+##                                                    NULL:1860 Munich        
+##                                                    NULL:Hansa Rostock      
+##                                                    NULL:Hamburger SV       
+##                                                    NULL:Energie Cottbus    
+##                                                    NULL:VfB Stuttgart      
+##                                                    NULL:Unterhaching       
+##                                                    NULL:E. Frankfurt       
+##                                                    NULL:VfL Bochum         
+##                                                    NULL:Bor. Dortmund      
+##                                                    NULL:Bay. Leverkusen    
+##                                                    NULL:Bayern Munich      
+##                                                    NULL:Hertha BSC         
+##                                                    NULL:FC Schalke 04      
+##                                                    NULL:Werder Bremen      
+##                                                    NULL:1.FC K'lautern     
+##                                                    NULL:VfB Stuttgart      
+##                                                    NULL:1860 Munich        
+##                                                    NULL:VfL Wolfsburg      
+##                                                    NULL:Hamburger SV       
+##                                                    NULL:Bor. M'gladbach    
+##                                                    NULL:Energie Cottbus    
+##                                                    NULL:Hansa Rostock      
+##    league_id          season     matches_played  matches_overall      wins      
+##  Min.   : 1.000   Min.   :1999   Min.   : 1.00   Min.   : 1.00   Min.   : 0.00  
+##  1st Qu.: 3.000   1st Qu.:2004   1st Qu.:34.00   1st Qu.:34.00   1st Qu.: 9.00  
+##  Median : 5.000   Median :2009   Median :34.00   Median :34.00   Median :12.00  
+##  Mean   : 5.307   Mean   :2009   Mean   :34.26   Mean   :34.92   Mean   :12.72  
+##  3rd Qu.: 8.000   3rd Qu.:2014   3rd Qu.:38.00   3rd Qu.:38.00   3rd Qu.:16.00  
+##  Max.   :10.000   Max.   :2018   Max.   :44.00   Max.   :44.00   Max.   :33.00  
+##                                                                                 
+##                                                                                 
+##                                                                                 
+##                                                                                 
+##                                                                                 
+##                                                                                 
+##                                                                                 
+##                                                                                 
+##                                                                                 
+##                                                                                 
+##                                                                                 
+##                                                                                 
+##                                                                                 
+##                                                                                 
+##                                                                                 
+##                                                                                 
+##                                                                                 
+##                                                                                 
+##                                                                                 
+##                                                                                 
+##                                                                                 
+##                                                                                 
+##                                                                                 
+##                                                                                 
+##                                                                                 
+##                                                                                 
+##                                                                                 
+##                                                                                 
+##                                                                                 
+##                                                                                 
+##                                                                                 
+##                                                                                 
+##                                                                                 
+##                                                                                 
+##                                                                                 
+##                                                                                 
+##                                                                                 
+##                                                                                 
+##                                                                                 
+##                                                                                 
+##                                                                                 
+##                                                                                 
+##                                                                                 
+##                                                                                 
+##      draws           loses        goals_scored      goals_cons       goals_diff       
+##  Min.   : 0.00   Min.   : 0.00   Min.   :  0.00   Min.   :  0.00   Min.   :-1.02e+02  
+##  1st Qu.: 7.00   1st Qu.: 9.00   1st Qu.: 36.00   1st Qu.: 37.00   1st Qu.:-1.50e+01  
+##  Median : 9.00   Median :13.00   Median : 44.00   Median : 46.00   Median :-3.00e+00  
+##  Mean   : 8.83   Mean   :12.72   Mean   : 45.98   Mean   : 45.98   Mean   : 2.80e-04  
+##  3rd Qu.:11.00   3rd Qu.:16.00   3rd Qu.: 54.00   3rd Qu.: 55.00   3rd Qu.: 1.20e+01  
+##  Max.   :34.00   Max.   :34.00   Max.   :121.00   Max.   :102.00   Max.   : 8.90e+01  
+##                                                                                       
+##                                                                                       
+##                                                                                       
+##                                                                                       
+##                                                                                       
+##                                                                                       
+##                                                                                       
+##                                                                                       
+##                                                                                       
+##                                                                                       
+##                                                                                       
+##                                                                                       
+##                                                                                       
+##                                                                                       
+##                                                                                       
+##                                                                                       
+##                                                                                       
+##                                                                                       
+##                                                                                       
+##                                                                                       
+##                                                                                       
+##                                                                                       
+##                                                                                       
+##                                                                                       
+##                                                                                       
+##                                                                                       
+##                                                                                       
+##                                                                                       
+##                                                                                       
+##                                                                                       
+##                                                                                       
+##                                                                                       
+##                                                                                       
+##                                                                                       
+##                                                                                       
+##                                                                                       
+##                                                                                       
+##                                                                                       
+##                                                                                       
+##                                                                                       
+##                                                                                       
+##                                                                                       
+##                                                                                       
+##                                                                                       
+##      points           place        qualified_to                is_champion     
+##  Min.   :  0.00   Min.   : 1.000   NULL:CL                    Min.   :0.00000  
+##  1st Qu.: 36.00   1st Qu.: 5.000   NULL:CL                    1st Qu.:0.00000  
+##  Median : 45.00   Median :10.000   NULL:CL Quals              Median :0.00000  
+##  Mean   : 46.88   Mean   : 9.733   NULL:CL Quals              Mean   :0.05451  
+##  3rd Qu.: 56.00   3rd Qu.:14.000   NULL:EL Quals              3rd Qu.:0.00000  
+##  Max.   :102.00   Max.   :20.000   NULL:EL Quals              Max.   :1.00000  
+##                                    NULL:                      NA's   :184      
+##                                    NULL:                                       
+##                                    NULL:                                       
+##                                    NULL:                                       
+##                                    NULL:                                       
+##                                    NULL:                                       
+##                                    NULL:                                       
+##                                    NULL:                                       
+##                                    NULL:                                       
+##                                    NULL:Relegated                              
+##                                    NULL:Relegated                              
+##                                    NULL:Relegated                              
+##                                    NULL:CL                                     
+##                                    NULL:CL                                     
+##                                    NULL:CL Quals                               
+##                                    NULL:CL Quals                               
+##                                    NULL:EL Quals                               
+##                                    NULL:EL Quals                               
+##                                    NULL:                                       
+##                                    NULL:                                       
+##                                    NULL:                                       
+##                                    NULL:                                       
+##                                    NULL:                                       
+##                                    NULL:                                       
+##                                    NULL:                                       
+##                                    NULL:                                       
+##                                    NULL:                                       
+##                                    NULL:Relegated                              
+##                                    NULL:Relegated                              
+##                                    NULL:Relegated                              
+##                                    NULL:CL                                     
+##                                    NULL:CL                                     
+##                                    NULL:CL Quals                               
+##                                    NULL:EL Quals                               
+##                                    NULL:EL Quals                               
+##                                    NULL:EL Quals                               
+##                                    NULL:                                       
+##                                    NULL:                                       
+##                                    NULL:                                       
+##                                    NULL:                                       
+##                                    NULL:                                       
+##                                    NULL:                                       
+##                                    NULL:                                       
+##                                    NULL:                                       
+##  is_cup_winner      is_promoted     
+##  Min.   :0.00000   Min.   :0.00000  
+##  1st Qu.:0.00000   1st Qu.:0.00000  
+##  Median :0.00000   Median :0.00000  
+##  Mean   :0.05333   Mean   :0.00206  
+##  3rd Qu.:0.00000   3rd Qu.:0.00000  
+##  Max.   :1.00000   Max.   :1.00000  
+##  NA's   :184       NA's   :184      
+##                                     
+##                                     
+##                                     
+##                                     
+##                                     
+##                                     
+##                                     
+##                                     
+##                                     
+##                                     
+##                                     
+##                                     
+##                                     
+##                                     
+##                                     
+##                                     
+##                                     
+##                                     
+##                                     
+##                                     
+##                                     
+##                                     
+##                                     
+##                                     
+##                                     
+##                                     
+##                                     
+##                                     
+##                                     
+##                                     
+##                                     
+##                                     
+##                                     
+##                                     
+##                                     
+##                                     
+##                                     
+##                                     
+##                                     
+##                                     
+##                                     
+##                                     
+##                                     
+##  [ reached getOption("max.print") -- omitted 3528 rows ]
+\end{verbatim}
+\begin{alltt}
+\hlkwd{dim}\hlstd{(clubs_in_leagues)}
+\end{alltt}
+\begin{verbatim}
+## [1] 3578   20
+\end{verbatim}
+\begin{alltt}
+\hlkwd{head}\hlstd{(clubs_in_leagues)}
+\end{alltt}
+\begin{verbatim}
+##   X id club_id       club_name league_id season matches_played matches_overall wins draws
+## 1 0  1       1  Bayern Munich          4   1999             34              34   22     7
+## 2 1  2       2 Bay. Leverkusen         4   1999             34              34   21    10
+## 3 2  3       3    Hamburger SV         4   1999             34              34   16    11
+## 4 3  4       4     1860 Munich         4   1999             34              34   14    11
+## 5 4  5       5  1.FC K'lautern         4   1999             34              34   15     5
+## 6 5  6       6      Hertha BSC         4   1999             34              34   13    11
+##   loses goals_scored goals_cons goals_diff points place qualified_to is_champion
+## 1     5           73         28         45     73     1           CL           1
+## 2     3           74         36         38     73     2           CL           0
+## 3     7           63         39         24     59     3     CL Quals           0
+## 4     9           55         48          7     53     4     CL Quals           0
+## 5    14           54         59         -5     50     5     EL Quals           0
+## 6    10           39         46         -7     50     6     EL Quals           0
+##   is_cup_winner is_promoted
+## 1             1           0
+## 2             0           0
+## 3             0           0
+## 4             0           0
+## 5             0           0
+## 6             0           0
+\end{verbatim}
+\begin{alltt}
+\hlkwd{anyNA}\hlstd{(clubs_in_leagues)} \hlcom{# TRUE}
+\end{alltt}
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+\begin{alltt}
+\hlkwd{ExpData}\hlstd{(clubs_in_leagues,} \hlkwc{type}\hlstd{=}\hlnum{1}\hlstd{)} \hlcom{# Check overview of data}
+\end{alltt}
+\begin{verbatim}
+##                                           Descriptions    Value
+## 1                                   Sample size (nrow)     3578
+## 2                              No. of variables (ncol)       20
+## 3                    No. of numeric/interger variables       18
+## 4                              No. of factor variables        0
+## 5                                No. of text variables        2
+## 6                             No. of logical variables        0
+## 7                          No. of identifier variables        2
+## 8                                No. of date variables        0
+## 9             No. of zero variance variables (uniform)        0
+## 10               %. of variables having complete cases 80% (16)
+## 11   %. of variables having >0% and <50% missing cases  15% (3)
+## 12 %. of variables having >=50% and <90% missing cases   5% (1)
+## 13          %. of variables having >=90% missing cases   0% (0)
+\end{verbatim}
+\begin{alltt}
+\hlkwd{ExpData}\hlstd{(clubs_in_leagues,} \hlkwc{type}\hlstd{=}\hlnum{2}\hlstd{)} \hlcom{# Check structure of data}
+\end{alltt}
+\begin{verbatim}
+##    Index   Variable_Name Variable_Type Per_of_Missing No_of_distinct_values
+## 1      1               X       integer        0.00000                  3578
+## 2      2              id       integer        0.00000                  3578
+## 3      3         club_id       integer        0.00000                   390
+## 4      4       club_name     character        0.00000                   407
+## 5      5       league_id       integer        0.00000                    10
+## 6      6          season       integer        0.00000                    20
+## 7      7  matches_played       integer        0.00000                    17
+## 8      8 matches_overall       integer        0.00000                    10
+## 9      9            wins       integer        0.00000                    34
+## 10    10           draws       integer        0.00000                    22
+## 11    11           loses       integer        0.00000                    31
+## 12    12    goals_scored       integer        0.00000                   107
+## 13    13      goals_cons       integer        0.00000                    85
+## 14    14      goals_diff       integer        0.00000                   142
+## 15    15          points       integer        0.00000                    93
+## 16    16           place       integer        0.00000                    20
+## 17    17    qualified_to     character        0.64142                     7
+## 18    18     is_champion       numeric        0.05143                     3
+## 19    19   is_cup_winner       numeric        0.05143                     3
+## 20    20     is_promoted       numeric        0.05143                     3
+\end{verbatim}
+\begin{alltt}
+\hlcom{# When looking at the data, EDA has revealed that NA values don't mean that much. Sometimes coaches and types of}
+\hlcom{# transfers were recorded in the case of famous clubs/players. Sometimes fees are not reported, which can be an issue.}
+
+\hlcom{# In particular, I am interested in transfers (players going from one club to another for a fee)}
+\hlcom{# In the Premier League, the league in England as it is regarded as one of the best.}
+\hlcom{# I will now create a data frame which contains these objects as it does not yet exist.}
+
+\hlstd{epl} \hlkwb{<-} \hlstd{dplyr}\hlopt{::}\hlkwd{filter}\hlstd{(clubs_in_leagues, league_id} \hlopt{%in%} \hlnum{1}\hlstd{)}
+\hlstd{epl_club_ids} \hlkwb{<-} \hlstd{epl}\hlopt{$}\hlstd{club_id}
+
+
+\hlcom{# This contains all the clubs that were active in the Premier League (since ~2005), but I am primarily}
+\hlcom{# interested in the current playing clubs. So let's subset those.}
+\hlstd{epl_current_club_ids} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlnum{265}\hlstd{,} \hlnum{269}\hlstd{,} \hlnum{307}\hlstd{,} \hlnum{301}\hlstd{,} \hlnum{268}\hlstd{,} \hlnum{294}\hlstd{,} \hlnum{276}\hlstd{,} \hlnum{288}\hlstd{,} \hlnum{266}\hlstd{,} \hlnum{271}\hlstd{,} \hlnum{267}\hlstd{,} \hlnum{286}\hlstd{,} \hlnum{264}\hlstd{,} \hlnum{274}\hlstd{,} \hlnum{298}\hlstd{,} \hlnum{278}\hlstd{,} \hlnum{273}\hlstd{,} \hlnum{291}\hlstd{,} \hlnum{272}\hlstd{,} \hlnum{293}\hlstd{)}
+\hlstd{epl_current_clubs} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlstr{"Arsenal"}\hlstd{,} \hlstr{"Aston Villa"}\hlstd{,} \hlstr{"Brighton"}\hlstd{,} \hlstr{"Burnley"}\hlstd{,} \hlstr{"Chelsea"}\hlstd{,} \hlstr{"Crystal Palace"}\hlstd{,} \hlstr{"Everton"}\hlstd{,} \hlstr{"Fulham"}\hlstd{,} \hlstr{"Leeds"}\hlstd{,} \hlstr{"Leicester"}\hlstd{,} \hlstr{"Liverpool"}\hlstd{,} \hlstr{"Man City"}\hlstd{,} \hlstr{"Man Utd"}\hlstd{,} \hlstr{"Newcastle"}\hlstd{,} \hlstr{"Sheffield Utd."}\hlstd{,} \hlstr{"Southampton"}\hlstd{,} \hlstr{"Spurs"}\hlstd{,} \hlstr{"West Bromwich Albion"}\hlstd{,} \hlstr{"West Ham"}\hlstd{,} \hlstr{"Wolves"}\hlstd{)}
+
+
+\hlstd{epl_in} \hlkwb{<-} \hlstd{dplyr}\hlopt{::}\hlkwd{filter}\hlstd{(transfers, to_club_id} \hlopt{%in%} \hlstd{epl_current_club_ids)}
+\hlstd{epl_out} \hlkwb{<-} \hlstd{dplyr}\hlopt{::}\hlkwd{filter}\hlstd{(transfers, from_club_id} \hlopt{%in%} \hlstd{epl_current_club_ids)}
+\hlstd{epl_transfers} \hlkwb{<-} \hlkwd{rbind}\hlstd{(epl_in, epl_out)}
+
+\hlstd{epl_transfers}\hlopt{$}\hlstd{date} \hlkwb{<-} \hlkwd{as.Date}\hlstd{(epl_transfers}\hlopt{$}\hlstd{date)}
+\hlstd{epl_in}\hlopt{$}\hlstd{date} \hlkwb{<-} \hlkwd{as.Date}\hlstd{(epl_in}\hlopt{$}\hlstd{date)}
+\hlstd{epl_out}\hlopt{$}\hlstd{date} \hlkwb{<-} \hlkwd{as.Date}\hlstd{(epl_out}\hlopt{$}\hlstd{date)}
+
+\hlstd{epl_transfers}\hlopt{$}\hlstd{date} \hlkwb{<-} \hlkwd{format}\hlstd{(epl_transfers}\hlopt{$}\hlstd{date,}\hlstr{"%Y"}\hlstd{)}
+\hlstd{epl_in}\hlopt{$}\hlstd{date} \hlkwb{<-} \hlkwd{format}\hlstd{(epl_in}\hlopt{$}\hlstd{date,}\hlstr{"%Y"}\hlstd{)}
+\hlstd{epl_out}\hlopt{$}\hlstd{date} \hlkwb{<-} \hlkwd{format}\hlstd{(epl_out}\hlopt{$}\hlstd{date,}\hlstr{"%Y"}\hlstd{)}
+
+\hlstd{epl_transfers[}\hlkwd{is.na}\hlstd{(}\hlkwc{x} \hlstd{= epl_transfers)]} \hlkwb{<-} \hlnum{0}
+\hlstd{epl_in[}\hlkwd{is.na}\hlstd{(}\hlkwc{x} \hlstd{= epl_in)]} \hlkwb{<-} \hlnum{0}
+\hlstd{epl_out[}\hlkwd{is.na}\hlstd{(}\hlkwc{x} \hlstd{= epl_out)]} \hlkwb{<-} \hlnum{0}
+
+\hlstd{epl} \hlkwb{<-} \hlstd{epl} \hlopt{%>%}
+  \hlkwd{group_by}\hlstd{(club_name, season)} \hlopt{%>%}
+  \hlkwd{filter}\hlstd{(season} \hlopt{>=} \hlnum{2005}\hlstd{, season} \hlopt{!=} \hlnum{2019}\hlstd{, club_id} \hlopt{%in%} \hlstd{epl_current_club_ids)}
+
+\hlstd{epl_transfers} \hlkwb{<-} \hlstd{epl_transfers} \hlopt{%>%}
+  \hlkwd{group_by}\hlstd{(to_club_name, date)} \hlopt{%>%}
+  \hlkwd{filter}\hlstd{(fee} \hlopt{>} \hlnum{0}\hlstd{, date} \hlopt{>=} \hlnum{2005}\hlstd{, date} \hlopt{!=} \hlnum{2019}\hlstd{, to_club_id} \hlopt{%in%} \hlstd{epl_current_club_ids} \hlopt{|} \hlstd{from_club_id} \hlopt{%in%} \hlstd{epl_current_club_ids)}
+
+\hlstd{epl_in} \hlkwb{<-} \hlstd{epl_in} \hlopt{%>%}
+  \hlkwd{group_by}\hlstd{(to_club_name, date)} \hlopt{%>%}
+  \hlkwd{filter}\hlstd{(fee} \hlopt{>} \hlnum{0}\hlstd{, date} \hlopt{>=} \hlnum{2005}\hlstd{, date} \hlopt{!=} \hlnum{2019}\hlstd{, to_club_id} \hlopt{%in%} \hlstd{epl_current_club_ids)}
+
+\hlstd{epl_out} \hlkwb{<-} \hlstd{epl_out} \hlopt{%>%}
+  \hlkwd{group_by}\hlstd{(to_club_name, date)} \hlopt{%>%}
+  \hlkwd{filter}\hlstd{(fee} \hlopt{>} \hlnum{0}\hlstd{, date} \hlopt{>=} \hlnum{2005}\hlstd{, date} \hlopt{!=} \hlnum{2019}\hlstd{, from_club_id} \hlopt{%in%} \hlstd{epl_current_club_ids)}
+
+\hlcom{# Let's perform some additional, global analysis as this is a new dataset.}
+\hlkwd{View}\hlstd{(epl_transfers)}
+\hlkwd{summary}\hlstd{(epl_transfers)}
+\end{alltt}
+\begin{verbatim}
+##        id           player_id       player_name                          season    
+##  Min.   :     8   Min.   :    1.0   NULL:Jermaine Beckford           Min.   :2004  
+##  1st Qu.:  6001   1st Qu.:  728.5   NULL:David N'Gog                 1st Qu.:2008  
+##  Median : 17664   Median : 2041.0   NULL:Tim Ream                    Median :2012  
+##  Mean   : 27468   Mean   : 2966.4   NULL:Ragnar Klavan               Mean   :2012  
+##  3rd Qu.: 41204   3rd Qu.: 4452.8   NULL:Henri Lansbury              3rd Qu.:2015  
+##  Max.   :110809   Max.   :11300.0   NULL:Ron Vlaar                   Max.   :2018  
+##                                     NULL:Shay Given                                
+##                                     NULL:Shay Given                                
+##                                     NULL:Kieron Dyer                               
+##                                     NULL:Ahmed Musa                                
+##                                     NULL:Mamadou Sakho                             
+##                                     NULL:Mamadou Sakho                             
+##                                     NULL:Mamadou Sakho                             
+##                                     NULL:Felipe Anderson                           
+##                                     NULL:Ashley Cole                               
+##                                     NULL:Nacho Monreal                             
+##                                     NULL:Lukas Podolski                            
+##                                     NULL:Steven Defour                             
+##                                     NULL:NicolÃ¡s Otamendi                         
+##                                     NULL:Branislav Ivanovic                        
+##                                     NULL:Sergio AgÃ¼ero                            
+##                                     NULL:Eliaquim Mangala                          
+##                                     NULL:Nani                                      
+##                                     NULL:Yakubu Aiyegbeni                          
+##                                     NULL:Yakubu Aiyegbeni                          
+##                                     NULL:Lewis Holtby                              
+##                                     NULL:Thibaut Courtois                          
+##                                     NULL:RaÃºl Meireles                            
+##                                     NULL:RaÃºl Meireles                            
+##                                     NULL:Lazar Markovic                            
+##                                     NULL:Heung-min Son                             
+##                                     NULL:Calum Chambers                            
+##                                     NULL:Pepe Reina                                
+##                                     NULL:Mousa DembÃ©lÃ©                           
+##                                     NULL:Mousa DembÃ©lÃ©                           
+##                                     NULL:Wilfried Bony                             
+##                                     NULL:AndrÃ© Ayew                               
+##                                     NULL:Andrey Arshavin                           
+##                                     NULL:Yuri Zhirkov                              
+##                                     NULL:John Stones                               
+##                                     NULL:John Stones                               
+##                                     NULL:Chicharito                                
+##                                     NULL:Chicharito                                
+##                                     NULL:YounÃ¨s Kaboul                            
+##                                     NULL:YounÃ¨s Kaboul                            
+##                                     NULL:Carlos Vela                               
+##                                     NULL:Daniel Agger                              
+##                                     NULL:Christian Eriksen                         
+##                                     NULL:Tomas Rosicky                             
+##                                     NULL:JoÃ£o MÃ¡rio                              
+##                                     NULL:Juan Mata                                 
+##                                     NULL:Juan Mata                                 
+##    date       from_club_id    from_club_name             to_club_id    
+##  NULL:2011   Min.   :   1.0   NULL:Everton             Min.   :   1.0  
+##  NULL:2008   1st Qu.: 266.0   NULL:Paris SG            1st Qu.: 268.0  
+##  NULL:2015   Median : 274.0   NULL:Bolton              Median : 274.0  
+##  NULL:2016   Mean   : 384.4   NULL:FC Augsburg         Mean   : 300.3  
+##  NULL:2017   3rd Qu.: 294.0   NULL:Nottm Forest        3rd Qu.: 292.8  
+##  NULL:2012   Max.   :7225.0   NULL:Feyenoord           Max.   :3976.0  
+##  NULL:2011                    NULL:Man City                            
+##  NULL:2009                    NULL:Newcastle                           
+##  NULL:2007                    NULL:Newcastle                           
+##  NULL:2016                    NULL:CSKA Moscow                         
+##  NULL:2017                    NULL:Liverpool                           
+##  NULL:2017                    NULL:Liverpool                           
+##  NULL:2013                    NULL:Paris SG                            
+##  NULL:2018                    NULL:Lazio                               
+##  NULL:2006                    NULL:Arsenal                             
+##  NULL:2013                    NULL:MÃ¡laga CF                          
+##  NULL:2012                    NULL:1. FC KÃ¶ln                         
+##  NULL:2016                    NULL:RSC Anderlecht                      
+##  NULL:2015                    NULL:Valencia                            
+##  NULL:2008                    NULL:Loko Moscow                         
+##  NULL:2011                    NULL:AtlÃ©tico Madrid                    
+##  NULL:2014                    NULL:FC Porto                            
+##  NULL:2007                    NULL:Sporting CP                         
+##  NULL:2011                    NULL:Everton                             
+##  NULL:2007                    NULL:Middlesbrough                       
+##  NULL:2013                    NULL:FC Schalke 04                       
+##  NULL:2011                    NULL:KRC Genk                            
+##  NULL:2011                    NULL:Liverpool                           
+##  NULL:2010                    NULL:FC Porto                            
+##  NULL:2014                    NULL:Benfica                             
+##  NULL:2015                    NULL:Bay. Leverkusen                     
+##  NULL:2014                    NULL:Southampton                         
+##  NULL:2005                    NULL:Villarreal                          
+##  NULL:2012                    NULL:Fulham                              
+##  NULL:2010                    NULL:AZ Alkmaar                          
+##  NULL:2015                    NULL:Swansea                             
+##  NULL:2016                    NULL:Swansea                             
+##  NULL:2009                    NULL:Zenit S-Pb                          
+##  NULL:2009                    NULL:CSKA Moscow                         
+##  NULL:2016                    NULL:Everton                             
+##  NULL:2013                    NULL:Barnsley FC                         
+##  NULL:2017                    NULL:Bay. Leverkusen                     
+##  NULL:2010                    NULL:Chivas                              
+##  NULL:2010                    NULL:Portsmouth                          
+##  NULL:2007                    NULL:AJ Auxerre                          
+##  NULL:2006                    NULL:Chivas                              
+##  NULL:2006                    NULL:BrÃ¶ndby IF                         
+##  NULL:2013                    NULL:AFC Ajax                            
+##  NULL:2006                    NULL:Bor. Dortmund                       
+##  NULL:2018                    NULL:Inter                               
+##  NULL:2014                    NULL:Chelsea                             
+##  NULL:2011                    NULL:Valencia                            
+##  to_club_name             market_value           fee           
+##  NULL:Leicester          Min.   :       0   Min.   :    10000  
+##  NULL:Liverpool          1st Qu.: 1500000   1st Qu.:  1300000  
+##  NULL:Fulham             Median : 4000000   Median :  3625000  
+##  NULL:Liverpool          Mean   : 7026053   Mean   :  7854706  
+##  NULL:Aston Villa        3rd Qu.: 9000000   3rd Qu.:  9300000  
+##  NULL:Aston Villa        Max.   :90000000   Max.   :135000000  
+##  NULL:Aston Villa                                              
+##  NULL:Man City                                                 
+##  NULL:West Ham                                                 
+##  NULL:Leicester                                                
+##  NULL:Crystal Palace                                           
+##  NULL:Crystal Palace                                           
+##  NULL:Liverpool                                                
+##  NULL:West Ham                                                 
+##  NULL:Chelsea                                                  
+##  NULL:Arsenal                                                  
+##  NULL:Arsenal                                                  
+##  NULL:Burnley                                                  
+##  NULL:Man City                                                 
+##  NULL:Chelsea                                                  
+##  NULL:Man City                                                 
+##  NULL:Man City                                                 
+##  NULL:Man Utd                                                  
+##  NULL:Leicester                                                
+##  NULL:Everton                                                  
+##  NULL:Spurs                                                    
+##  NULL:Chelsea                                                  
+##  NULL:Chelsea                                                  
+##  NULL:Liverpool                                                
+##  NULL:Liverpool                                                
+##  NULL:Spurs                                                    
+##  NULL:Arsenal                                                  
+##  NULL:Liverpool                                                
+##  NULL:Spurs                                                    
+##  NULL:Fulham                                                   
+##  NULL:Man City                                                 
+##  NULL:West Ham                                                 
+##  NULL:Arsenal                                                  
+##  NULL:Chelsea                                                  
+##  NULL:Man City                                                 
+##  NULL:Everton                                                  
+##  NULL:West Ham                                                 
+##  NULL:Man Utd                                                  
+##  NULL:Spurs                                                    
+##  NULL:Spurs                                                    
+##  NULL:Arsenal                                                  
+##  NULL:Liverpool                                                
+##  NULL:Spurs                                                    
+##  NULL:Arsenal                                                  
+##  NULL:West Ham                                                 
+##  NULL:Man Utd                                                  
+##  NULL:Chelsea                                                  
+##  from_coach_name                 to_coach_name                
+##  NULL:David Moyes                NULL:Sven-GÃ¶ran Eriksson    
+##  NULL:Paul Le Guen               NULL:Rafael BenÃ­tez         
+##  NULL:Neil Lennon                NULL:Kit Symons              
+##  NULL:Dirk Schuster              NULL:JÃ¼rgen Klopp           
+##  NULL:Gary Brazil                NULL:Steve Bruce             
+##  NULL:Ronald Koeman              NULL:Paul Lambert            
+##  NULL:Roberto Mancini            NULL:Alex McLeish            
+##  NULL:Joe Kinnear                NULL:Mark Hughes             
+##  NULL:Sam Allardyce              NULL:Alan Curbishley         
+##  NULL:Leonid Slutski             NULL:Claudio Ranieri         
+##  NULL:JÃ¼rgen Klopp              NULL:Frank de Boer           
+##  NULL:JÃ¼rgen Klopp              NULL:Sam Allardyce           
+##  NULL:Laurent Blanc              NULL:Brendan Rodgers         
+##  NULL:Simone Inzaghi             NULL:Manuel Pellegrini       
+##  NULL:ArsÃ¨ne Wenger             NULL:JosÃ© Mourinho          
+##  NULL:Manuel Pellegrini          NULL:ArsÃ¨ne Wenger          
+##  NULL:Holger Stanislawski        NULL:ArsÃ¨ne Wenger          
+##  NULL:RenÃ© Weiler               NULL:Sean Dyche              
+##  NULL:Nuno EspÃ­rito Santo       NULL:Manuel Pellegrini       
+##  NULL:Rashid Rakhimov            NULL:Avram Grant             
+##  NULL:Gregorio Manzano           NULL:Roberto Mancini         
+##  NULL:Julen Lopetegui            NULL:Manuel Pellegrini       
+##  NULL:Paulo Bento                NULL:Sir Alex Ferguson       
+##  NULL:David Moyes                NULL:Sven-GÃ¶ran Eriksson    
+##  NULL:Gareth Southgate           NULL:David Moyes             
+##  NULL:Jens Keller                NULL:AndrÃ© Villas-Boas      
+##  NULL:Frank Vercauteren          NULL:AndrÃ© Villas-Boas      
+##  NULL:Sir Kenny Dalglish         NULL:AndrÃ© Villas-Boas      
+##  NULL:AndrÃ© Villas-Boas         NULL:Roy Hodgson             
+##  NULL:Jorge Jesus                NULL:Brendan Rodgers         
+##  NULL:Roger Schmidt              NULL:Mauricio Pochettino     
+##  NULL:Ronald Koeman              NULL:ArsÃ¨ne Wenger          
+##  NULL:Manuel Pellegrini          NULL:Rafael BenÃ­tez         
+##  NULL:Martin Jol                 NULL:AndrÃ© Villas-Boas      
+##  NULL:Gertjan Verbeek            NULL:Mark Hughes             
+##  NULL:Garry Monk                 NULL:Manuel Pellegrini       
+##  NULL:Francesco Guidolin         NULL:Slaven Bilic            
+##  NULL:Dick Advocaat              NULL:ArsÃ¨ne Wenger          
+##  NULL:Zico                       NULL:Carlo Ancelotti         
+##  NULL:Ronald Koeman              NULL:Pep Guardiola           
+##  NULL:David Flitcroft            NULL:David Moyes             
+##  NULL:Heiko Herrlich             NULL:Slaven Bilic            
+##  NULL:JosÃ© Luis Real            NULL:Sir Alex Ferguson       
+##  NULL:Avram Grant                NULL:Harry Redknapp          
+##  NULL:Jean Fernandez             NULL:Martin Jol              
+##  NULL:Hans Westerhof             NULL:ArsÃ¨ne Wenger          
+##  NULL:Michael Laudrup            NULL:Rafael BenÃ­tez         
+##  NULL:Frank de Boer              NULL:AndrÃ© Villas-Boas      
+##  NULL:Bert van Marwijk           NULL:ArsÃ¨ne Wenger          
+##  NULL:Luciano Spalletti          NULL:David Moyes             
+##  NULL:JosÃ© Mourinho             NULL:David Moyes             
+##  NULL:Unai Emery                 NULL:AndrÃ© Villas-Boas      
+##  from_sport_dir_name             to_sport_dir_name             contract_was_till
+##  NULL:                           NULL:                         NULL:            
+##  NULL:                           NULL:                         NULL:            
+##  NULL:                           NULL:Alan Curbishley          NULL:2017-06-30  
+##  NULL:                           NULL:                         NULL:2017-06-30  
+##  NULL:                           NULL:Steve Round              NULL:2017-06-30  
+##  NULL:Martin van Geel            NULL:                         NULL:            
+##  NULL:Mike Rigg                  NULL:                         NULL:            
+##  NULL:Dennis Wise                NULL:Mike Rigg                NULL:            
+##  NULL:                           NULL:                         NULL:            
+##  NULL:Oleg Yarovinski            NULL:Jon Rudkin               NULL:2019-06-30  
+##  NULL:                           NULL:Dougie Freedman          NULL:2020-06-30  
+##  NULL:                           NULL:                         NULL:2020-06-30  
+##  NULL:Olivier LÃ©tang            NULL:                         NULL:            
+##  NULL:Igli Tare                  NULL:Mario Husillos           NULL:2020-06-30  
+##  NULL:                           NULL:                         NULL:            
+##  NULL:Mario Husillos             NULL:                         NULL:2016-06-30  
+##  NULL:Dr. JÃ¶rg Jakobs           NULL:                         NULL:2013-06-30  
+##  NULL:Herman Van Holsbeeck       NULL:                         NULL:2019-06-30  
+##  NULL:                           NULL:Txiki Begiristain        NULL:2019-06-30  
+##  NULL:                           NULL:                         NULL:2009-12-31  
+##  NULL:JosÃ© Luis Caminero        NULL:Mike Rigg                NULL:            
+##  NULL:Antero Henrique            NULL:Txiki Begiristain        NULL:2016-06-30  
+##  NULL:Pedro Barbosa              NULL:                         NULL:2009-06-30  
+##  NULL:                           NULL:                         NULL:            
+##  NULL:                           NULL:                         NULL:            
+##  NULL:Horst Heldt                NULL:                         NULL:2013-06-30  
+##  NULL:                           NULL:Michael Emenalo          NULL:2014-06-30  
+##  NULL:                           NULL:Michael Emenalo          NULL:2014-06-30  
+##  NULL:Antero Henrique            NULL:                         NULL:            
+##  NULL:Rui Costa                  NULL:                         NULL:2018-06-30  
+##  NULL:Jonas Boldt                NULL:Franco Baldini           NULL:2018-06-30  
+##  NULL:Martin Hunter              NULL:                         NULL:            
+##  NULL:                           NULL:                         NULL:            
+##  NULL:                           NULL:                         NULL:            
+##  NULL:Earnie Stewart             NULL:                         NULL:            
+##  NULL:                           NULL:Txiki Begiristain        NULL:            
+##  NULL:                           NULL:                         NULL:2019-06-30  
+##  NULL:                           NULL:                         NULL:            
+##  NULL:                           NULL:                         NULL:            
+##  NULL:Steve Walsh                NULL:Txiki Begiristain        NULL:2019-06-30  
+##  NULL:                           NULL:                         NULL:2013-06-30  
+##  NULL:Jonas Boldt                NULL:                         NULL:2018-06-30  
+##  NULL:EfraÃ­n Flores             NULL:                         NULL:2014-06-30  
+##  NULL:                           NULL:                         NULL:2014-06-30  
+##  NULL:                           NULL:                         NULL:            
+##  NULL:                           NULL:                         NULL:            
+##  NULL:                           NULL:                         NULL:            
+##  NULL:Marc Overmars              NULL:Franco Baldini           NULL:2014-06-30  
+##  NULL:Michael Zorc               NULL:                         NULL:            
+##  NULL:Dario Baccin               NULL:                         NULL:2021-06-30  
+##  NULL:Michael Emenalo            NULL:                         NULL:2016-06-30  
+##  NULL:Braulio                    NULL:Michael Emenalo          NULL:            
+##     is_loan        is_end_of_loan is_future_transfer
+##  Min.   :0.00000   Min.   :0      Min.   :0         
+##  1st Qu.:0.00000   1st Qu.:0      1st Qu.:0         
+##  Median :0.00000   Median :0      Median :0         
+##  Mean   :0.08947   Mean   :0      Mean   :0         
+##  3rd Qu.:0.00000   3rd Qu.:0      3rd Qu.:0         
+##  Max.   :1.00000   Max.   :0      Max.   :0         
+##                                                     
+##                                                     
+##                                                     
+##                                                     
+##                                                     
+##                                                     
+##                                                     
+##                                                     
+##                                                     
+##                                                     
+##                                                     
+##                                                     
+##                                                     
+##                                                     
+##                                                     
+##                                                     
+##                                                     
+##                                                     
+##                                                     
+##                                                     
+##                                                     
+##                                                     
+##                                                     
+##                                                     
+##                                                     
+##                                                     
+##                                                     
+##                                                     
+##                                                     
+##                                                     
+##                                                     
+##                                                     
+##                                                     
+##                                                     
+##                                                     
+##                                                     
+##                                                     
+##                                                     
+##                                                     
+##                                                     
+##                                                     
+##                                                     
+##                                                     
+##                                                     
+##                                                     
+##                                                     
+##  [ reached getOption("max.print") -- omitted 2418 rows ]
+\end{verbatim}
+\begin{alltt}
+\hlkwd{dim}\hlstd{(epl_transfers)}
+\end{alltt}
+\begin{verbatim}
+## [1] 2470   19
+\end{verbatim}
+\begin{alltt}
+\hlkwd{head}\hlstd{(epl_transfers)}
+\end{alltt}
+\begin{verbatim}
+## # A tibble: 6 x 19
+## # Groups:   to_club_name, date [6]
+##      id player_id player_name season date  from_club_id from_club_name to_club_id
+##   <int>     <int> <chr>        <int> <chr>        <int> <chr>               <int>
+## 1     8         1 Jermaine B~   2011 2011           276 Everton               271
+## 2   100        10 David N'Gog   2008 2008            39 Paris SG              267
+## 3   161        17 Tim Ream      2015 2015           289 Bolton                288
+## 4   307        29 Ragnar Kla~   2016 2016            30 FC Augsburg           267
+## 5   318        30 Henri Lans~   2016 2017           532 Nottm Forest          269
+## 6   353        33 Ron Vlaar     2012 2012           167 Feyenoord             269
+## # ... with 11 more variables: to_club_name <chr>, market_value <dbl>, fee <dbl>,
+## #   from_coach_name <chr>, to_coach_name <chr>, from_sport_dir_name <chr>,
+## #   to_sport_dir_name <chr>, contract_was_till <chr>, is_loan <int>,
+## #   is_end_of_loan <int>, is_future_transfer <int>
+\end{verbatim}
+\begin{alltt}
+\hlkwd{anyNA}\hlstd{(epl_transfers)} \hlcom{# FALSE}
+\end{alltt}
+\begin{verbatim}
+## [1] FALSE
+\end{verbatim}
+\begin{alltt}
+\hlkwd{ExpData}\hlstd{(epl_transfers,} \hlkwc{type}\hlstd{=}\hlnum{1}\hlstd{)} \hlcom{# Check overview of data}
+\end{alltt}
+\begin{verbatim}
+##                                           Descriptions       Value
+## 1                                   Sample size (nrow)        2470
+## 2                              No. of variables (ncol)          19
+## 3                    No. of numeric/interger variables          10
+## 4                              No. of factor variables           0
+## 5                                No. of text variables           9
+## 6                             No. of logical variables           0
+## 7                          No. of identifier variables           0
+## 8                                No. of date variables           0
+## 9             No. of zero variance variables (uniform)           2
+## 10               %. of variables having complete cases 73.68% (14)
+## 11   %. of variables having >0% and <50% missing cases  10.53% (2)
+## 12 %. of variables having >=50% and <90% missing cases  15.79% (3)
+## 13          %. of variables having >=90% missing cases      0% (0)
+\end{verbatim}
+\begin{alltt}
+\hlkwd{ExpData}\hlstd{(epl_transfers,} \hlkwc{type}\hlstd{=}\hlnum{2}\hlstd{)} \hlcom{# Check structure of data}
+\end{alltt}
+\begin{verbatim}
+##    Index       Variable_Name Variable_Type Per_of_Missing No_of_distinct_values
+## 1      1                  id       integer        0.00000                  2150
+## 2      2           player_id       integer        0.00000                  1382
+## 3      3         player_name     character        0.00000                  1381
+## 4      4              season       integer        0.00000                    15
+## 5      5                date     character        0.00000                    14
+## 6      6        from_club_id       integer        0.00000                   348
+## 7      7      from_club_name     character        0.00000                   348
+## 8      8          to_club_id       integer        0.00000                   197
+## 9      9        to_club_name     character        0.00000                   197
+## 10    10        market_value       numeric        0.00000                   160
+## 11    11                 fee       numeric        0.00000                   440
+## 12    12     from_coach_name     character        0.03401                   559
+## 13    13       to_coach_name     character        0.02955                   365
+## 14    14 from_sport_dir_name     character        0.62834                   250
+## 15    15   to_sport_dir_name     character        0.66964                   184
+## 16    16   contract_was_till     character        0.57368                    29
+## 17    17             is_loan       integer        0.00000                     2
+## 18    18      is_end_of_loan       integer        0.00000                     1
+## 19    19  is_future_transfer       integer        0.00000                     1
+\end{verbatim}
+\begin{alltt}
+\hlcom{# Now, let's look at visualizations and interesting parts of the data}
+
+\hlstd{epl_in_summary} \hlkwb{<-} \hlstd{epl_in} \hlopt{%>%}
+  \hlkwd{group_by}\hlstd{(to_club_name, date)} \hlopt{%>%}
+  \hlkwd{filter}\hlstd{(fee} \hlopt{>} \hlnum{0}\hlstd{, date} \hlopt{>=} \hlnum{2005}\hlstd{, date} \hlopt{!=} \hlnum{2019}\hlstd{)} \hlopt{%>%}
+  \hlkwd{summarise}\hlstd{(}
+    \hlkwc{mean} \hlstd{=} \hlkwd{mean}\hlstd{(fee),}
+    \hlkwc{variance} \hlstd{=} \hlkwd{var}\hlstd{(fee),}
+    \hlkwc{min} \hlstd{=} \hlkwd{min}\hlstd{(fee),}
+    \hlkwc{max} \hlstd{=} \hlkwd{max}\hlstd{(fee)}
+  \hlstd{)}
+\end{alltt}
+
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# `summarise()` regrouping output by 'to\_club\_name' (override with `.groups` argument)}}\begin{alltt}
+\hlstd{epl_out_summary} \hlkwb{<-} \hlstd{epl_out} \hlopt{%>%}
+  \hlkwd{group_by}\hlstd{(from_club_name, date)} \hlopt{%>%}
+  \hlkwd{filter}\hlstd{(fee} \hlopt{>} \hlnum{0}\hlstd{, date} \hlopt{>=} \hlnum{2005}\hlstd{, date} \hlopt{!=} \hlnum{2019}\hlstd{)} \hlopt{%>%}
+  \hlkwd{summarise}\hlstd{(}
+    \hlkwc{mean} \hlstd{=} \hlkwd{mean}\hlstd{(fee),}
+    \hlkwc{variance} \hlstd{=} \hlkwd{var}\hlstd{(fee),}
+    \hlkwc{min} \hlstd{=} \hlkwd{min}\hlstd{(fee),}
+    \hlkwc{max} \hlstd{=} \hlkwd{max}\hlstd{(fee)}
+  \hlstd{)}
+\end{alltt}
+
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# `summarise()` regrouping output by 'from\_club\_name' (override with `.groups` argument)}}\begin{alltt}
+\hlcom{# Transfers (incl. Loans) recorded per year by current playing clubs in 2020/21 season}
+
+\hlcom{# Transfers IN}
+\hlstd{p1} \hlkwb{<-} \hlkwd{ggplot}\hlstd{(epl_in,} \hlkwd{aes}\hlstd{(}\hlkwc{x} \hlstd{=} \hlkwd{as.factor}\hlstd{(date)))} \hlopt{+}
+  \hlkwd{geom_bar}\hlstd{(}\hlkwd{aes}\hlstd{(}\hlkwc{fill}\hlstd{=to_club_name))} \hlopt{+}
+  \hlkwd{xlab}\hlstd{(}\hlstr{"Year"}\hlstd{)} \hlopt{+}
+  \hlkwd{ylab}\hlstd{(}\hlstr{"Amount of transfers in by clubs"}\hlstd{)} \hlopt{+}
+  \hlkwd{ggtitle}\hlstd{(}\hlstr{"Amount of transfers in by Premier League clubs currently playing in the 2020/21 season"}\hlstd{)}
+
+\hlstd{p1} \hlopt{+} \hlkwd{theme_light}\hlstd{()}
+\end{alltt}
+\end{kframe}
+
+{\centering \includegraphics[width=.6\linewidth]{figure/5670721-assignment-eda-Rnwauto-report-1} 
+
+}
+
+
+\begin{kframe}\begin{alltt}
+\hlcom{# Transfers OUT}
+\hlstd{p2} \hlkwb{<-} \hlkwd{ggplot}\hlstd{(epl_out,} \hlkwd{aes}\hlstd{(}\hlkwc{x} \hlstd{=} \hlkwd{as.factor}\hlstd{(date)))} \hlopt{+}
+  \hlkwd{geom_bar}\hlstd{(}\hlkwd{aes}\hlstd{(}\hlkwc{fill}\hlstd{=from_club_name))} \hlopt{+}
+  \hlkwd{xlab}\hlstd{(}\hlstr{"Year"}\hlstd{)} \hlopt{+}
+  \hlkwd{ylab}\hlstd{(}\hlstr{"Amount of transfers out by clubs"}\hlstd{)} \hlopt{+}
+  \hlkwd{ggtitle}\hlstd{(}\hlstr{"Amount of transfers out by Premier League clubs currently playing in the 2020/21 season"}\hlstd{)}
+
+\hlstd{p2} \hlopt{+} \hlkwd{theme_light}\hlstd{()}
+\end{alltt}
+\end{kframe}
+
+{\centering \includegraphics[width=.6\linewidth]{figure/5670721-assignment-eda-Rnwauto-report-2} 
+
+}
+
+
+\begin{kframe}\begin{alltt}
+\hlcom{# All Transfers}
+\hlstd{p3} \hlkwb{<-} \hlkwd{ggplot}\hlstd{(epl_transfers,} \hlkwd{aes}\hlstd{(}\hlkwc{x} \hlstd{=} \hlkwd{as.factor}\hlstd{(date)))} \hlopt{+}
+  \hlkwd{geom_bar}\hlstd{()} \hlopt{+}
+  \hlkwd{xlab}\hlstd{(}\hlstr{"Year"}\hlstd{)} \hlopt{+}
+  \hlkwd{ylab}\hlstd{(}\hlstr{"Total amount of transfers by clubs per year"}\hlstd{)} \hlopt{+}
+  \hlkwd{ggtitle}\hlstd{(}\hlstr{"Total amount of transfers by Premier League clubs currently playing in the 2020/21 season"}\hlstd{)}
+
+\hlstd{p3} \hlopt{+} \hlkwd{theme_light}\hlstd{()}
+\end{alltt}
+\end{kframe}
+
+{\centering \includegraphics[width=.6\linewidth]{figure/5670721-assignment-eda-Rnwauto-report-3} 
+
+}
+
+
+\begin{kframe}\begin{alltt}
+\hlcom{# Most expensive player brought into a Premier League Club}
+\hlstd{max_fee} \hlkwb{<-} \hlkwd{max}\hlstd{(epl_in}\hlopt{$}\hlstd{fee)}
+\hlstd{index_fee_max} \hlkwb{<-} \hlkwd{which}\hlstd{(epl_in}\hlopt{$}\hlstd{fee} \hlopt{==} \hlstd{max_fee)}
+\hlstd{most_expensive_player_in} \hlkwb{<-} \hlstd{epl_in[index_fee_max,]}
+\hlstd{most_expensive_player_in}
+\end{alltt}
+\begin{verbatim}
+## # A tibble: 1 x 19
+## # Groups:   to_club_name, date [1]
+##      id player_id player_name season date  from_club_id from_club_name to_club_id
+##   <int>     <int> <chr>        <int> <chr>        <int> <chr>               <int>
+## 1  6852       830 Paul Pogba    2016 2016           196 Juventus              264
+## # ... with 11 more variables: to_club_name <chr>, market_value <dbl>, fee <dbl>,
+## #   from_coach_name <chr>, to_coach_name <chr>, from_sport_dir_name <chr>,
+## #   to_sport_dir_name <chr>, contract_was_till <chr>, is_loan <int>,
+## #   is_end_of_loan <int>, is_future_transfer <int>
+\end{verbatim}
+\begin{alltt}
+\hlcom{# Most expensive player sold from Premier League Club}
+\hlstd{max_fee_out} \hlkwb{<-} \hlkwd{max}\hlstd{(epl_out}\hlopt{$}\hlstd{fee)}
+\hlstd{index_fee_max_out} \hlkwb{<-} \hlkwd{which}\hlstd{(epl_out}\hlopt{$}\hlstd{fee} \hlopt{==} \hlstd{max_fee_out)}
+\hlstd{most_expensive_player_out} \hlkwb{<-} \hlstd{epl_out[index_fee_max_out,]}
+\hlstd{most_expensive_player_out}
+\end{alltt}
+\begin{verbatim}
+## # A tibble: 1 x 19
+## # Groups:   to_club_name, date [1]
+##      id player_id player_name season date  from_club_id from_club_name to_club_id
+##   <int>     <int> <chr>        <int> <chr>        <int> <chr>               <int>
+## 1  6829       828 Philippe C~   2017 2018           267 Liverpool              79
+## # ... with 11 more variables: to_club_name <chr>, market_value <dbl>, fee <dbl>,
+## #   from_coach_name <chr>, to_coach_name <chr>, from_sport_dir_name <chr>,
+## #   to_sport_dir_name <chr>, contract_was_till <chr>, is_loan <int>,
+## #   is_end_of_loan <int>, is_future_transfer <int>
+\end{verbatim}
+\begin{alltt}
+\hlcom{# Players who have been sold/loaned the most times}
+\hlstd{out_counts} \hlkwb{<-} \hlkwd{as.data.frame}\hlstd{(}\hlkwd{table}\hlstd{(epl_transfers}\hlopt{$}\hlstd{player_name))}
+\hlstd{max_10_counts} \hlkwb{<-} \hlstd{out_counts[}\hlkwd{with}\hlstd{(out_counts,} \hlkwd{order}\hlstd{(}\hlopt{-}\hlstd{Freq)),]}
+\hlstd{max_10_counts[}\hlnum{1}\hlopt{:}\hlnum{10}\hlstd{,]}
+\end{alltt}
+\begin{verbatim}
+##                   Var1 Freq
+## 170        Billy Sharp    8
+## 398  Emmanuel Adebayor    8
+## 1136      Robbie Keane    8
+## 1198      Scott Parker    8
+## 1062    Paul Konchesky    7
+## 1152     Romelu Lukaku    7
+## 1199    Scott Sinclair    7
+## 1341   Wayne Routledge    7
+## 10        Aaron Lennon    6
+## 103       Andy Carroll    6
+\end{verbatim}
+\begin{alltt}
+\hlcom{# Biggest spenders since 2005}
+
+\hlstd{biggest_spenders} \hlkwb{<-} \hlstd{epl_in} \hlopt{%>%}
+  \hlkwd{group_by}\hlstd{(to_club_name)} \hlopt{%>%}
+  \hlkwd{filter}\hlstd{(fee} \hlopt{>} \hlnum{0}\hlstd{, date} \hlopt{>=} \hlnum{2005}\hlstd{, date} \hlopt{!=} \hlnum{2019}\hlstd{)} \hlopt{%>%}
+  \hlkwd{summarise}\hlstd{(}
+    \hlkwc{sum} \hlstd{=} \hlkwd{sum}\hlstd{(fee)}
+  \hlstd{)}
+\end{alltt}
+
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# `summarise()` ungrouping output (override with `.groups` argument)}}\begin{alltt}
+\hlstd{p4} \hlkwb{<-} \hlkwd{ggplot}\hlstd{(biggest_spenders,} \hlkwd{aes}\hlstd{(}\hlkwc{x} \hlstd{= to_club_name,} \hlkwc{y} \hlstd{= sum))} \hlopt{+}
+  \hlkwd{geom_col}\hlstd{()} \hlopt{+}
+  \hlkwd{xlab}\hlstd{(}\hlstr{"Club"}\hlstd{)} \hlopt{+}
+  \hlkwd{ylab}\hlstd{(}\hlstr{"Total amount of money spent on transfers"}\hlstd{)} \hlopt{+}
+  \hlkwd{ggtitle}\hlstd{(}\hlstr{"Biggest transfer spenders by Premier League clubs current playing in the 2020/21 season"}\hlstd{)}
+
+\hlstd{p4} \hlopt{+} \hlkwd{theme_light}\hlstd{()} \hlopt{+} \hlkwd{coord_flip}\hlstd{()}
+\end{alltt}
+\end{kframe}
+
+{\centering \includegraphics[width=.6\linewidth]{figure/5670721-assignment-eda-Rnwauto-report-4} 
+
+}
+
+
+\begin{kframe}\begin{alltt}
+\hlcom{# Biggest sellers since 2005}
+
+\hlstd{biggest_sellers} \hlkwb{<-} \hlstd{epl_out} \hlopt{%>%}
+  \hlkwd{group_by}\hlstd{(from_club_name)} \hlopt{%>%}
+  \hlkwd{filter}\hlstd{(fee} \hlopt{>} \hlnum{0}\hlstd{, date} \hlopt{>=} \hlnum{2005}\hlstd{, date} \hlopt{!=} \hlnum{2019}\hlstd{)} \hlopt{%>%}
+  \hlkwd{summarise}\hlstd{(}
+    \hlkwc{sum} \hlstd{=} \hlkwd{sum}\hlstd{(fee)}
+  \hlstd{)}
+\end{alltt}
+
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# `summarise()` ungrouping output (override with `.groups` argument)}}\begin{alltt}
+\hlstd{p5} \hlkwb{<-} \hlkwd{ggplot}\hlstd{(biggest_sellers,} \hlkwd{aes}\hlstd{(}\hlkwc{x} \hlstd{= from_club_name,} \hlkwc{y} \hlstd{= sum))} \hlopt{+}
+  \hlkwd{geom_col}\hlstd{()} \hlopt{+}
+  \hlkwd{xlab}\hlstd{(}\hlstr{"Club"}\hlstd{)} \hlopt{+}
+  \hlkwd{ylab}\hlstd{(}\hlstr{"Total amount of money gained on transfers"}\hlstd{)} \hlopt{+}
+  \hlkwd{ggtitle}\hlstd{(}\hlstr{"Biggest player selling Premier League clubs current playing in the 2020/21 season"}\hlstd{)}
+
+\hlstd{p5} \hlopt{+} \hlkwd{theme_light}\hlstd{()} \hlopt{+} \hlkwd{coord_flip}\hlstd{()}
+\end{alltt}
+\end{kframe}
+
+{\centering \includegraphics[width=.6\linewidth]{figure/5670721-assignment-eda-Rnwauto-report-5} 
+
+}
+
+
+
+\end{knitrout}
+
+The R session information (including the OS info, R version and all
+packages used):
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{sessionInfo}\hlstd{()}
+\end{alltt}
+\begin{verbatim}
+## R version 4.0.2 (2020-06-22)
+## Platform: x86_64-w64-mingw32/x64 (64-bit)
+## Running under: Windows 10 x64 (build 19041)
+## 
+## Matrix products: default
+## 
+## locale:
+## [1] LC_COLLATE=English_United Kingdom.1252  LC_CTYPE=English_United Kingdom.1252   
+## [3] LC_MONETARY=English_United Kingdom.1252 LC_NUMERIC=C                           
+## [5] LC_TIME=English_United Kingdom.1252    
+## 
+## attached base packages:
+## [1] stats     graphics  grDevices utils     datasets  methods   base     
+## 
+## other attached packages:
+##  [1] network_1.16.1  SmartEDA_0.3.6  readxl_1.3.1    haven_2.3.1     forcats_0.5.0  
+##  [6] stringr_1.4.0   dplyr_1.0.2     purrr_0.3.4     readr_1.4.0     tidyr_1.1.2    
+## [11] tibble_3.0.3    ggplot2_3.3.2   tidyverse_1.3.0 ISLR_1.2        knitr_1.29     
+## 
+## loaded via a namespace (and not attached):
+##  [1] Rcpp_1.0.5         lubridate_1.7.9    utf8_1.1.4         assertthat_0.2.1  
+##  [5] digest_0.6.25      R6_2.4.1           cellranger_1.1.0   plyr_1.8.6        
+##  [9] backports_1.1.9    reprex_0.3.0       evaluate_0.14      httr_1.4.2        
+## [13] highr_0.8          pillar_1.4.6       rlang_0.4.7        rstudioapi_0.11   
+## [17] data.table_1.13.0  blob_1.2.1         rmarkdown_2.4      labeling_0.3      
+## [21] munsell_0.5.0      tinytex_0.26       broom_0.7.0        compiler_4.0.2    
+## [25] modelr_0.1.8       xfun_0.17          pkgconfig_2.0.3    htmltools_0.5.0   
+## [29] tidyselect_1.1.0   lpSolve_5.6.15     gridExtra_2.3      reshape_0.8.8     
+## [33] fansi_0.4.1        crayon_1.3.4       dbplyr_1.4.4       withr_2.2.0       
+## [37] MASS_7.3-51.6      grid_4.0.2         jsonlite_1.7.1     GGally_2.0.0      
+## [41] gtable_0.3.0       lifecycle_0.2.0    DBI_1.1.0          magrittr_1.5      
+## [45] scales_1.1.1       cli_2.0.2          stringi_1.5.3      farver_2.0.3      
+## [49] fs_1.5.0           xml2_1.3.2         ellipsis_0.3.1     generics_0.0.2    
+## [53] vctrs_0.3.4        RColorBrewer_1.1-2 tools_4.0.2        glue_1.4.2        
+## [57] hms_0.5.3          colorspace_1.4-1   sampling_2.8       rvest_0.3.6
+\end{verbatim}
+\begin{alltt}
+\hlkwd{Sys.time}\hlstd{()}
+\end{alltt}
+\begin{verbatim}
+## [1] "2020-11-27 10:57:43 CET"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+\end{document}
